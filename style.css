@@ -1,0 +1,90 @@
+body {
+  /* width: 100vh; */
+  /* height: 100vh; */
+  font-family: 'Montserrat', san-serif;
+  background: #262c3c;
+  color: white;
+}
+
+h1 {
+  padding-top: 7.5px;
+
+  margin-top: -410px;
+  text-align: center;
+  font-size: 65px;
+  font-weight: 600;
+}
+
+
+.h2-1 {
+  margin-top: 500px;
+}
+
+h2 {
+  margin-top: 100px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+p {
+  padding-bottom: 15px;
+  color: white;
+  /* margin-top: -400px; */
+  text-align: center;
+  /* margin-left: 100px; */
+}
+
+.codeP {
+
+  margin-top: 10px;
+  /* height: 500px; */
+
+  display: flex;
+  justify-content: center
+}
+
+.upcoming {
+  padding: 30px;
+}
+
+.ucm {
+  padding: 3px;
+  background-color:#24a9ef;
+  border-radius: 5px;
+}
+
+code {
+   /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 900px;
+
+  /* width: 400px; */
+  /* display: block; */
+}
+
+.heading {
+  margin-bottom: 100px;
+}
+
+.footera {
+  /* padding-top: 8px; */
+  /* padding-bottom: 8px; */
+  height: 100px;
+  background-color: rgba(65, 62, 62, 0.5);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.illus {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 700px;
+  background: url('https://assets.toptal.io/images?url=https://bs-uploads.toptal.io/blackfish-uploads/components/blog_post_page/content/cover_image_file/cover_image/939361/image_0_-_2020-10-29T004035.476-cc364b02d182123639613c7c0b2bfc1e.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+}
