@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/VOI 14 Bài 4 - Trò Chơi Với Những Viên Bi
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/ballgmvn" target="self">https://oj.vnoi.info/problem/ballgmvn</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        #include &lt;algorithm&gt;
+        using namespace std;
+        
+        #define MAX 2147483647
+        
+        void sort(int* list, double* a, int left, int right) {
+          double x = a[(left + right) / 2];
+          int i = left;
+          int j = right;
+        
+          do {
+            while (a[i] &lt; x) i++;
+            while (a[j] &gt; x) j--;
+            if (i &lt;= j) {
+              swap(a[i], a[j]);
+              swap(list[i], list[j]);
+              i++;
+              j--;
+            }
+          } while (i &lt; j);
+          if (left &lt; j) sort(list, a, left, j);
+          if (i &lt; right) sort(list, a, i, right);
+        }
+        
+        int main() {
+          int n;
+          cin &gt;&gt; n;
+        
+          int* xGreen = new int[n + 1];
+          int* yGreen = new int[n + 1];
+          int* idexG = new int[n + 1];
+        
+          for (int i = 1; i &lt;= n; i++) {
+            cin &gt;&gt; xGreen[i] &gt;&gt; yGreen[i];
+            idexG[i] = i;
+          }
+        
+          int* xRed = new int[n + 1];
+          int* yRed = new int[n + 1];
+          int* idexR = new int[n + 1];
+        
+          for (int i = 1; i &lt;= n; i++) {
+            cin &gt;&gt; xRed[i] &gt;&gt; yRed[i];
+            idexR[i] = n + i;
+          }
+        
+          //---
+        
+          for (int i = 1; i &lt;= n; i++) {
+            double* angle = new double[n + 1];
+            int* list = new int[n + 1];
+            for (int j = 1; j &lt;= n; j++) {
+              double a = yRed[j] - yGreen[i];
+              double b = xRed[j] - xGreen[i];
+              list[j] = idexR[j];
+              if (b == 0) {
+                angle[j] = MAX;
+              }
+              else angle[j] = a / b;
+            }
+        
+            sort(list, angle, 1, n);
+        
+            for (int j = 1; j &lt;= n - 1; j++) {
+              if (angle[j] == angle[j + 1]) {
+                cout &lt;&lt; idexG[i] &lt;&lt; &quot; &quot; &lt;&lt; list[j] &lt;&lt; &quot; &quot; &lt;&lt; list[j + 1] &lt;&lt; endl;
+                return 0;
+              }
+            }
+          }
+        
+          //---
+        
+          for (int i = 1; i &lt;= n; i++) {
+            double* angle = new double[n + 1];
+            int* list = new int[n + 1];
+            for (int j = 1; j &lt;= n; j++) {
+              double a = yGreen[j] - yRed[i];
+              double b = xGreen[j] - xRed[i];
+              list[j] = idexG[j];
+              if (b == 0) {
+                angle[j] = MAX;
+              }
+              else angle[j] = a / b;
+            }
+        
+            sort(list, angle, 1, n);
+        
+            for (int j = 1; j &lt;= n - 1; j++) {
+              if (angle[j] == angle[j + 1]) {
+                cout &lt;&lt; idexR[i] &lt;&lt; &quot; &quot; &lt;&lt; list[j] &lt;&lt; &quot; &quot; &lt;&lt; list[j + 1] &lt;&lt; endl;
+                return 0;
+              }
+            }
+          }
+        
+          cout &lt;&lt; -1 &lt;&lt; endl;
+        
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

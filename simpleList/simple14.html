@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/VOI 22 Bài 1 - Chọn cặp
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/voi22_pair" target="self">https://oj.vnoi.info/problem/voi22_pair</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        #include &lt;algorithm&gt;
+        #include &lt;map&gt;
+        using namespace std;
+        
+        map&lt;int, int&gt; iDex;
+        
+        int main() {
+            if (fopen(&quot;PAIR.INP&quot;, &quot;r&quot;)) {
+            freopen(&quot;PAIR.INP&quot;, &quot;r&quot;, stdin);
+            freopen(&quot;PAIR.OUT&quot;, &quot;w&quot;, stdout);
+          }
+          int n, d;
+          cin &gt;&gt; n &gt;&gt; d;
+        
+          int* arr = new int[n + 10];
+        
+          for (int i = 0; i &lt; n; i++) {
+            cin &gt;&gt; arr[i];
+            iDex[arr[i]]++;
+          }
+        
+          if (d == 0) {
+            int ans = 0;
+            for (int i = 0; i &lt; n - 1; i++) {
+              for (int j = i + 1; j &lt; n; j++) {
+                int sum = arr[i] + arr[j];
+                int pair = 0;
+        
+                map&lt;int, int&gt; tmp(iDex);
+                
+                for (int k = 0; k &lt; n; k++) {
+                  if (arr[k] == sum - arr[k]) {
+                    while (tmp[arr[k]] &gt;= 2) {
+                      tmp[arr[k]] -= 2;
+                      pair++;
+                    }
+                  }
+                  else if (tmp[arr[k]] &gt; 0 &amp;&amp; tmp[sum - arr[k]] &gt; 0) {
+                    tmp[arr[k]]--;
+                    tmp[sum - arr[k]]--;
+                    pair++;
+                  };
+                }
+                ans = max(ans, pair);
+              }
+            }
+            cout &lt;&lt; ans;
+          }
+          else if (d == 1) {
+            sort(arr, arr + n);
+            int ans = 0;
+            for (int i = 0; i &lt; n - 1; i++) {
+              for (int j = i + 1; j &lt; n; j++) {
+                int sum = arr[i] + arr[j];
+                int left = 0;
+                int right = n - 1;
+                int pair = 0;
+        
+                while (left &lt; right) {
+                  if (arr[left] + arr[right] == sum + 1) {
+                    pair++;
+                    left++;
+                    right--;
+                  }
+                  else if (arr[left] + arr[right] == sum) {
+                    pair++;
+                    left++;
+                    right--;
+                  }
+                  else {
+                    if (arr[left] + arr[right] &gt; sum) right--;
+                    else if (arr[left] + arr[right] &lt; sum) left++;
+                  }
+                }
+        
+                ans = max(ans, pair);
+              }
+            }
+        
+            cout &lt;&lt; ans;
+          }
+        
+          return 0;
+        
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
