@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/BCMATHP - Lũy thừa 2
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCMATHP/" target="self">https://www.spoj.com/PTIT/problems/BCMATHP/</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        #include &lt;string&gt;
+        using namespace std;
+         
+        string prod(string s1, string s2) {
+          int* c = new int[s1.length() + s2.length() + 1] { 0 };
+         
+          for (int i = s1.length() - 1; i &gt;= 0; i--) {
+            for (int j = s2.length() - 1; j &gt;= 0; j--) {
+              int a = s1[i] - &apos;0&apos;;
+              int b = s2[j] - &apos;0&apos;;
+              c[i + j] = c[i + j] + a * b;
+            }
+          }
+          string s3 = &quot;&quot;;
+          for (int i = s1.length() + s2.length() - 1 - 1; i &gt;= 1; i--) {
+            c[i - 1] = c[i - 1] + (c[i] / 10);
+            c[i] = c[i] % 10;
+            s3 = (char)(c[i] + &apos;0&apos;) + s3;
+          }
+          //cout &lt;&lt; s3 &lt;&lt; endl;
+          string sub = to_string(c[0]);
+          s3 = sub + s3;
+          while (s3[0] == &apos;0&apos; &amp;&amp; s3.length() &gt; 1) s3.erase(0, 1);
+          return s3;
+        }
+         
+        int main() {
+          int a, b;
+          cin &gt;&gt; a &gt;&gt; b;
+          string s = &quot;1&quot;;
+          for (int i = 1; i &lt;= a; i++) {
+            s = prod(&quot;2&quot;, s);
+          }
+          for (int i = a + 1; i &lt;= 62; i++) {
+            s = prod(&quot;2&quot;, s);
+            
+            int n = s[0] - &apos;0&apos;;
+            if (n == b) {
+              cout &lt;&lt; i &lt;&lt; endl;
+              return 0;
+            }
+          }
+          cout &lt;&lt; 0 &lt;&lt; endl;
+          return 0;
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

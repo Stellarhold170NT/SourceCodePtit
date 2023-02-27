@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/BCBOM - Trò chơi dò mìn    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCBOM/" target="self">https://www.spoj.com/PTIT/problems/BCBOM/</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        using namespace std;
+         
+        int main() {
+          int n, m;
+          cin &gt;&gt; n &gt;&gt; m;
+          if (n == 0) return 0;
+          while (n != 0) {
+            char str[200][200];
+         
+            for (int i = 0; i &lt; 200; i++) {
+              for (int j = 0; j &lt; 200; j++) {
+                str[i][j] = &apos;.&apos;;
+              }
+            }
+         
+            for (int i = 1; i &lt;= n; i++) {
+              for (int j = 1; j &lt;= m; j++) {
+                cin &gt;&gt; str[i][j];
+              }
+            }
+         
+            int* f = new int[200000] { 0 };
+         
+            for (int i = 1; i &lt;= n; i++) {
+              for (int j = 1; j &lt;= m; j++) {
+                if (str[i][j] == &apos;.&apos;) {
+                  int c = 1;
+                  if (str[i - 1][j] == &apos;*&apos;) c++;
+                  if (str[i - 1][j - 1] == &apos;*&apos;) c++;
+                  if (str[i - 1][j + 1] == &apos;*&apos;) c++;
+                  if (str[i][j - 1] == &apos;*&apos;) c++;
+                  if (str[i][j + 1] == &apos;*&apos;) c++;
+                  if (str[i + 1][j] == &apos;*&apos;) c++;
+                  if (str[i + 1][j - 1] == &apos;*&apos;) c++;
+                  if (str[i + 1][j + 1] == &apos;*&apos;) c++;
+                  f[(i - 1) * m + j] = c;
+                  //cout &lt;&lt; i &lt;&lt; &quot;-&quot; &lt;&lt; j &lt;&lt; &quot;-&quot; &lt;&lt; c &lt;&lt; endl;
+                }
+              }
+            }
+         
+            for (int i = 1; i &lt;= n * m; i++) {
+              //cout &lt;&lt; &quot;+&quot; &lt;&lt; f[i] &lt;&lt; &quot;+&quot;;
+              if (f[i] &gt; 0) cout &lt;&lt; f[i] - 1;
+              else cout &lt;&lt; &apos;*&apos;;
+              if (i % m == 0) cout &lt;&lt; endl;
+            }
+            cin &gt;&gt; n &gt;&gt; m;
+         
+          }
+          return 0;
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

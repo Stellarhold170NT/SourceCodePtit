@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/BCACM11C - Biểu diễn số bằng que diêm</h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCACM11C/" target="self">https://www.spoj.com/PTIT/problems/BCACM11C/</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        using namespace std;
+         
+        int analyze(int n) {
+          int t = 0;
+          while (n &gt; 0) {
+            switch (n % 10) {
+            case 1: {t += 2; break; }
+            case 2: {t += 5; break; }
+            case 3: {t += 5; break; }
+            case 4: {t += 4; break; }
+            case 5: {t += 5; break; }
+            case 6: {t += 6; break; }
+            case 7: {t += 3; break; }
+            case 8: {t += 7; break; }
+            case 9: {t += 6; break; }
+            case 0: {t += 6; break; }
+            }
+            n /= 10;
+          }
+          return t;
+        }
+         
+        int result(int n) {
+          int i = 1;
+          while (true) {
+            if (analyze(i) == n) {
+              break;
+            }
+            i++;
+          }
+          return i;
+        }
+         
+        int main() {
+          int t;
+          cin &gt;&gt; t;
+         
+          while (t--) {
+            int n;
+            cin &gt;&gt; n;
+         
+            if (n &lt;= 17) cout &lt;&lt; result(n);
+            else {
+              int q = n / 7;
+              switch (n % 7) {
+              case 4: { cout &lt;&lt; &quot;20&quot; + std::string(q - 1, &apos;8&apos;); break; }
+              case 5: { cout &lt;&lt; &quot;2&quot; + std::string(q, &apos;8&apos;); break; }
+              case 6: { cout &lt;&lt; &quot;6&quot; + std::string(q, &apos;8&apos;); break; }
+              case 0: { cout &lt;&lt; std::string(q, &apos;8&apos;); break; }
+              case 1: { cout &lt;&lt; &quot;10&quot; + std::string(q - 1, &apos;8&apos;); break; }
+              case 2: { cout &lt;&lt; &quot;1&quot; + std::string(q, &apos;8&apos;); break; }
+              case 3: { cout &lt;&lt; &quot;200&quot; + std::string(q - 2, &apos;8&apos;); break; }
+              }
+            }
+         
+            int r = n / 2;
+            cout &lt;&lt; &quot; &quot; &lt;&lt; ((n % 2 == 0) ? std::string(r, &apos;1&apos;) : &quot;7&quot; + std::string(r - 1, &apos;1&apos;)) &lt;&lt; endl;
+          }
+          return 0;
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

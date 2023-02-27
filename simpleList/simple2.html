@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="./simpleList.html"><div class="header">
+    </div></a>
+    <h1>/ALGOPRO6 - Giá trị của năm</h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/ALGOPRO6/" target="self">https://www.spoj.com/PTIT/problems/ALGOPRO6/</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        using namespace std;
+         
+        int sumDigit(int n) {
+          int t = 0;
+          while (n &gt; 0) {
+            t += n % 10;
+            n = n / 10;
+          }
+          return t;
+        }
+         
+        int main() {
+          int n;
+          cin &gt;&gt; n;
+         
+          int sum28 = 0;
+         
+          for (int i = 1; i &lt;= 28; i++) {
+            sum28 += sumDigit(i);
+          }
+         
+          int sum29 = sum28 + 2 + 9;
+          int sum30 = sum29 + 3 + 0;
+          int sum31 = sum30 + 3 + 1;
+         
+          long long sumYear = 0;
+          if ((n % 4 == 0 &amp;&amp; n % 100 != 0) || (n % 100 == 0 &amp;&amp; n % 400 == 0)) {
+            sumYear += 366 * sumDigit(n);
+          }
+          else {
+            sumYear += 365 * sumDigit(n);
+          }
+         
+          for (int i = 1; i &lt;= 12; i++) {
+            switch (i) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12: {
+              sumYear += 31 * sumDigit(i);
+              sumYear += sum31;
+              break;
+            }
+            case 2: {
+              if ((n % 4 == 0 &amp;&amp; n % 100 != 0) || (n % 100 == 0 &amp;&amp; n % 400 == 0)) {
+                sumYear += 29 * sumDigit(i);
+                sumYear += sum29;
+              }
+              else {
+                sumYear += 28 * sumDigit(i);
+                sumYear += sum28;
+              }
+              break;
+            }
+            case 4: case 6: case 9: case 11: {
+              sumYear += 30 * sumDigit(i);
+              sumYear += sum30;
+              break;
+            }
+            }
+          }
+         
+          cout &lt;&lt; sumYear &lt;&lt; endl;
+         
+          return 0;
+         
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
