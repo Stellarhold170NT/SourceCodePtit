@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/LUDI - Lưu diễn
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/53" target="self">http://ntucoder.net/Problem/Details/53</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var a,b,f:array[0..100000] of longint;
+                n,i,j,max,kq:longint;
+        Procedure Hoanvi(var a,b:longint); var tg:longint; begin tg:=a; a:=b; b:=tg; end;
+        Procedure Sort(l,r:longint);
+        var i,j,x:longint;
+        begin
+            i:=l; j:=r; x:=a[(l+r) div 2];
+            repeat
+                while x&gt;a[i] do inc(i); while x&lt;a[j] do dec(j);
+                if i&lt;=j then begin hoanvi(a[i],a[j]); hoanvi(b[i],b[j]); inc(i); dec(j); end;
+            until i&gt;j;
+            if l&lt;j then sort(l,j); if i&lt;r then sort(i,r);
+        end;
+        Begin
+            readln(n);
+            for i:=1 to n do
+            begin
+                readln(a[i],b[i]);
+            end; sort(1,n);   //writeln(&apos;a&apos;);
+        
+            f[1]:=1; kq:=-maxlongint;
+            for i:=2 to n do
+            begin
+             max:=0;
+             for j:=i-1 downto 1 do
+               if (a[i]&gt;b[j]) and (f[j]&gt;max) then max:=f[j];
+             f[i]:=max+1;
+             if kq&lt;max+1 then kq:=max+1;
+            end;
+            //for i:=1 to n do write(f[i],&apos; &apos;);
+            writeln(kq);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

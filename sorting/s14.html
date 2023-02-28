@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/SXCHON - Sắp xếp chọn
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/1140" target="self">http://ntucoder.net/Problem/Details/1140</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  n,i,j,vitri,k,min:longint;
+             a:array[1..1000000] of longint;
+        Begin
+            readln(n);
+            for i:=1 to n do read(a[i]); //Nhap n phan tu
+            for i:=1 to n-1 do  //Chon a[n] lam chot, xet n-1 so
+            begin
+                vitri:=i; //vitri ban dau la i
+                min:=a[i]; //macdinh a[i] la so nho nhat ban dau
+                for j:=i+1 to n do
+                begin
+                    if a[j]&lt;min then begin  //tim so be hon
+                        vitri:=j; //luu vitri
+                        min:=a[j]; //luu min
+                    end;
+                end; //writeln(j);
+                    if i&lt;&gt;vitri then  //hoan vi dang cap :))
+                    begin
+                        a[i]:=a[i] xor a[vitri];
+                        a[vitri]:=a[i] xor a[vitri];
+                        a[i]:=a[i] xor a[vitri];
+                    end;
+                    for k:=1 to n do  //in ra
+                      if (k=i) or (k=vitri) then write(&apos;[&apos;,a[k],&apos;] &apos;)
+                      else write(a[k],&apos; &apos;); //Co hai truong hop: truong hop so a[i] la min, hoac a[k] la min (k&gt;i)
+                      writeln; // xuong dong :l
+                end;
+        
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

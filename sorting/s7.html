@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/GIDA - Giao đấu (OLP 2014)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/124" target="self">http://ntucoder.net/Problem/Details/124</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        var a,b:array[0..100000] of int64;
+        n,i,j,kq:longint;
+    procedure sort(l,r: longint);
+          var
+             i,j,x,y: longint;
+          begin
+             i:=l;
+             j:=r;
+             x:=a[(l+r) div 2];
+             repeat
+               while a[i]&lt;x do
+                inc(i);
+               while x&lt;a[j] do
+                dec(j);
+               if not(i&gt;j) then
+                 begin
+                    y:=a[i];
+                    a[i]:=a[j];
+                    a[j]:=y;
+                    inc(i);
+                    j:=j-1;
+                 end;
+             until i&gt;j;
+             if l&lt;j then
+               sort(l,j);
+             if i&lt;r then
+               sort(i,r);
+          end;
+    
+    procedure sort1(l,r: longint);
+          var
+             i,j,x,y: longint;
+          begin
+             i:=l;
+             j:=r;
+             x:=b[(l+r) div 2];
+             repeat
+               while b[i]&lt;x do
+                inc(i);
+               while x&lt;b[j] do
+                dec(j);
+               if not(i&gt;j) then
+                 begin
+                    y:=b[i];
+                    b[i]:=b[j];
+                    b[j]:=y;
+                    inc(i);
+                    j:=j-1;
+                 end;
+             until i&gt;j;
+             if l&lt;j then
+               sort1(l,j);
+             if i&lt;r then
+               sort1(i,r);
+          end;
+    begin
+    readln(n);
+    for i:=1 to n do
+    read(a[i]);
+    readln;
+    for i:=1 to n do
+    read(b[i]);
+    sort(1,n);sort1(1,n);
+    i:=1;
+    j:=1;
+    while (i&lt;=n) and (j&lt;=n) do
+    begin
+    if b[i]&gt;a[j] then
+    begin
+    inc(kq);
+    inc(i);
+    inc(j);
+    end
+    else
+    inc(i);
+    end;
+    write(kq);
+    end.
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
