@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/Educational Backtracking: Tháp Hà Nội 2
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/backtrack_b" target="self">https://oj.vnoi.info/problem/backtrack_b</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        #include &lt;cstring&gt;
+        using namespace std;
+        
+        long long countTime = 0;
+        bool checkFirst = false;
+        
+        bool checkTrace[40][100][100];
+        string Trace[40][100][100];
+        
+        void Move(int n, char source, char target, char temp, string&amp; str) {
+          
+          if (n &lt; 1) return;
+          if (n == 1) {
+            countTime += 1;
+            str = str + source + target + &quot;\n&quot;;
+          }
+          else {
+            string str_temp1 = &quot;&quot;;
+            if (checkTrace[n - 1][source][temp] == false) {
+              Trace[n - 1][source][temp] = &quot;&quot;;
+              Move(n - 1, source, temp, target, str_temp1);
+              Trace[n - 1][source][temp] = str_temp1;
+              checkTrace[n - 1][source][temp] = true;
+            }
+            else {
+              str_temp1 = Trace[n - 1][source][temp];
+              countTime += str_temp1.length() / 3;
+            }
+        
+            string str_temp2 = &quot;&quot;;
+            if (checkTrace[1][source][target] == false) {
+              Trace[1][source][target] = &quot;&quot;;
+              Move(1, source, target, temp, str_temp2);
+              Trace[1][source][target] = str_temp2;
+              checkTrace[1][source][target] = true;
+            }
+            else {
+              str_temp2 = Trace[1][source][target];
+              countTime += str_temp2.length() / 3;
+            }
+        
+            string str_temp3 = &quot;&quot;;
+            if (checkTrace[n - 1][temp][target] == false) {
+              Trace[n - 1][temp][target] = &quot;&quot;;
+              Move(n - 1, temp, target, source, str_temp3);
+              Trace[n - 1][temp][target] = str_temp3;
+              checkTrace[n - 1][temp][target] = true;
+            }
+            else {
+              str_temp3 = Trace[n - 1][temp][target];
+              countTime += str_temp3.length() / 3;
+            }
+        
+            // last processs
+            if (str.length() &gt; 0 &amp;&amp; str_temp1[0] == str[str.length() - 2]) {
+              str[str.length() - 2] = str_temp1[1];
+              str_temp1.erase(0, 3);
+              countTime--;
+              if (str[str.length() - 2] == str[str.length() - 3]) {
+                str.erase(str.length() - 3, 3);
+                countTime--;
+              }
+            }
+        
+            if (str_temp1.length() &gt; 0 &amp;&amp; str_temp2[0] == str_temp1[str_temp1.length() - 2]) {
+              str_temp1[str_temp1.length() - 2] = str_temp2[1];
+              str_temp2.erase(0, 3);
+              countTime--;
+              if (str_temp1[str_temp1.length() - 2] == str_temp1[str_temp1.length() - 3]) {
+                str_temp1.erase(str_temp1.length() - 3, 3);
+                countTime--;
+              }
+            }
+        
+            if (str_temp2.length() &gt; 0 &amp;&amp; str_temp3[0] == str_temp2[str_temp2.length() - 2]) {
+              str_temp2[str_temp2.length() - 2] = str_temp3[1];
+              str_temp3.erase(0, 3);
+              countTime--;
+              if (str_temp2[str_temp2.length() - 2] == str_temp2[str_temp2.length() - 3]) {
+                str_temp2.erase(str_temp2.length() - 3, 3);
+                countTime--;
+              }
+            }
+            
+            str = str + str_temp1 + str_temp2 + str_temp3;
+          }
+        }
+        
+        void HanoiTower(int* arrX, int i, int* findX, string&amp; str) {
+          // @check
+          if (arrX[i] == -1) return;
+          int getX = arrX[i];
+          int positionX = findX[getX];
+        
+          if (positionX == 1) {
+            Move(getX - 1, &apos;C&apos;, &apos;B&apos;, &apos;A&apos;, str);
+            Move(1, &apos;A&apos;, &apos;C&apos;, &apos;B&apos;, str);
+            Move(getX - 1, &apos;B&apos;, &apos;C&apos;, &apos;A&apos;, str);
+          }
+          else if (positionX == 2) {
+            Move(getX - 1, &apos;C&apos;, &apos;A&apos;, &apos;B&apos;, str);
+            Move(1, &apos;B&apos;, &apos;C&apos;, &apos;A&apos;, str);
+            Move(getX - 1, &apos;A&apos;, &apos;C&apos;, &apos;B&apos;, str);
+          }
+        
+          if (str.length() &gt;= 6 &amp;&amp; checkFirst == false) {
+            checkFirst = true;
+            if (str[1] == str[3]) {
+              if (str[0] != str[4]) {
+                str.erase(1, 3);
+                countTime -= 1;
+              }
+              else {
+                str.erase(0, 6);
+                countTime -= 2;
+              }
+            }
+          }
+        
+          HanoiTower(arrX, i + 1, findX, str);
+        }
+        // @helper method
+        void showArray(int* arr, int n) {
+          for (int i = 0; i &lt;= n; i++) {
+            cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
+          }
+          cout &lt;&lt; endl;
+        }
+        
+        int main() {
+          int n;
+          cin &gt;&gt; n;
+          cin.ignore();
+        
+          char str[100];
+          cin.getline(str, 100);
+        
+          int column1[100] = { 0 };
+          int a = -1;
+        
+          int column2[100] = { 0 };
+          int b = -1;
+        
+          int column3[100] = { 0 };
+          int c = -1;
+        
+        
+          // @set column
+          for (int i = strlen(str) - 1; i &gt;= 0; i--) {
+            if (str[i] == &apos;A&apos;) {
+              column1[++a] = i + 1;
+            }
+        
+            if (str[i] == &apos;B&apos;) {
+              column2[++b] = i + 1;
+            }
+        
+            if (str[i] == &apos;C&apos;) {
+              column3[++c] = i + 1;
+            }
+          }
+        
+          int arrX[100] = { 0 };
+          int d = -1;
+        
+          int i = c;
+          int num = 1;
+        
+          // @getX
+          while (num &lt;= n) {
+            if (column3[i] == num) {
+              num++;
+              if (i &gt; 0) i--;
+            }
+            else {
+              arrX[++d] = num;
+              num++;
+            }
+          }
+          // end of arrX
+          arrX[++d] = -1;
+        
+          // @findX
+          int findX[100] = { 0 };
+          int f = 0;
+        
+          int temp1 = a;
+          int temp2 = b;
+          int temp3 = 0;
+          for (int i = 0; i &lt;= d - 1; i++) {
+            if (arrX[temp3] == column1[temp1]) {
+              findX[arrX[temp3]] = 1;
+              temp3++;
+              temp1--;
+            }
+            else {
+              findX[arrX[temp3]] = 2;
+              temp3++;
+              temp2--;
+            }
+          }
+        
+          // process
+          string strTemp = &quot;&quot;;
+        
+          HanoiTower(arrX, 0, findX, strTemp);
+          cout &lt;&lt; countTime &lt;&lt; endl;
+          cout &lt;&lt; strTemp;
+        
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

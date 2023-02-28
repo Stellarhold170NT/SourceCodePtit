@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/Aladdin
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/aladdin" target="self">https://oj.vnoi.info/problem/aladdin</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+        using namespace std;
+        
+        int n;
+        int c[200][200];
+        int blackBoard[300][300];
+        bool found = false;
+        
+        void showArray(int arr[][300]) {
+          for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+              cout &lt;&lt; arr[i][j] &lt;&lt; &quot; &quot;;
+            }
+            cout &lt;&lt; endl;
+          }
+        }
+        
+        bool inMatrix(int x, int y) {
+          if ((x &gt;= 1 &amp;&amp; x &lt;= n)
+            &amp;&amp; (y &gt;= 1 &amp;&amp; y &lt;= n)) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
+        
+        bool check(int x, int y, int rangeMin, int rangeMax) {
+          if (!inMatrix(x, y)) return true;
+          if (x == n || y == n) return true;
+        
+          int sumSubRange = blackBoard[x][y] + blackBoard[x][y + 1]
+            + blackBoard[x + 1][y] + blackBoard[x + 1][y + 1];
+          int l = c[x][y] - sumSubRange;
+          
+          return (l &gt;= rangeMin &amp;&amp; l &lt;= rangeMax);
+        
+        }
+        
+        void Alad(int p, int q, int i, int j) {
+          //cout &lt;&lt; p &lt;&lt; &quot; &quot; &lt;&lt; q &lt;&lt; &quot; &quot; &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; j &lt;&lt; endl;
+          //showArray(blackBoard);
+          //cout &lt;&lt; endl;
+          if (found) return;
+          if (p &gt; n) {
+            //cout &lt;&lt; &quot;END&quot; &lt;&lt; endl;
+            showArray(blackBoard);
+            found = true;
+            return;
+          }
+        
+          for (int u = 0; u &lt;= 1; u++) {
+            blackBoard[i][j] = u;
+            if (!check(i - 1, j - 1, 0, 0)) continue;
+            if (!check(i - 1, j, 0, 1)) continue;
+            if (!check(i, j - 1, 0, 2)) continue;
+        
+            if (inMatrix(i + 1, j - 1)) {
+              Alad(p, q, i + 1, j - 1);
+              //blackBoard[i][j] = 0;
+        
+            }
+            else {
+              if (q &lt; n) Alad(p, q + 1, p, q + 1);
+              else Alad(p + 1, q, p + 1, q);
+              //blackBoard[i][j] = 0;
+        
+            }
+            //blackBoard[i][j] = 0;
+          }
+          blackBoard[i][j] = 0;
+        }
+        
+        int main() {
+          cin &gt;&gt; n;
+        
+          for (int i = 1; i &lt;= n - 1; i++) {
+            for (int j = 1; j &lt;= n - 1; j++) {
+              cin &gt;&gt; c[i][j];
+            }
+          }
+        
+          Alad(1, 1, 1, 1);
+          if (!found) cout &lt;&lt; &quot;No solution&quot; &lt;&lt; endl;
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

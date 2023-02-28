@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/MERGENUM - Ghép số
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/5621" target="self">http://ntucoder.net/Problem/Details/5621</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  a,b,i,j:longint;  s1,s2,temp,smax,smin:string;
+        Begin
+            readln(a,b);
+            str(a,s1); str(b,s2);
+        
+            smax:=&apos;&apos;;
+        
+            i:=1; j:=1;
+            while (s1&lt;&gt;&apos;&apos;) and (s2&lt;&gt;&apos;&apos;) do
+             begin
+                 if (s1+s2&gt;s2+s1) and (s1[i]&gt;=s2[j]) then
+                  begin
+                      smax:=smax+s1[i];
+                      //inc(i);
+                      delete(s1,1,1);
+                  end
+                  else
+                  begin
+                      smax:=smax+s2[j];
+                      //inc(j);
+                      delete(s2,1,1);
+                  end;
+             end;
+             smax:=smax+s1+s2;
+            // writeln(smax);
+        
+             s1:=&apos;&apos;; s2:=&apos;&apos;;
+             str(a,s1); str(b,s2); i:=1; j:=1;
+             smin:=&apos;&apos;;
+             while (s1&lt;&gt;&apos;&apos;) and (s2&lt;&gt;&apos;&apos;) do
+              begin
+                  if (s1+s2&lt;s2+s1) and (s1[i]&lt;=s2[j]) then
+                   begin
+                       smin:=smin+s1[i];
+                       //inc(i);
+                       delete(s1,1,1);
+                   end
+                   else
+                   begin
+                       smin:=smin+s2[j];
+                       //inc(j);
+                       delete(s2,1,1);
+                   end;
+              end;
+             // writeln(smin);
+        
+             smin:=smin+s1+s2;
+             writeln(smin); writeln(smax);
+             readln;
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

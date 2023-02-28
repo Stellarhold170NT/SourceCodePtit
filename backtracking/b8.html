@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/DAYNGO - Dãy ngoặc đúng
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/139" target="self">http://ntucoder.net/Problem/Details/139</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  n,count:longint; s:ansistring;  a:array[1..10000] of char;
+        Procedure Check;
+        var s1:ansistring; d:string; k:longint;
+        begin
+            s:=&apos;&apos;;
+            for k:=1 to n do begin s:=s+a[k]; end;     //writeln(s);
+            s1:=s;
+            d:=&apos;()&apos;;
+            while pos(d,s)&lt;&gt;0 do delete(s,pos(d,s),2);
+            if s=&apos;&apos; then begin writeln(s1); inc(count); end;
+            s:=&apos;&apos;;
+        end;
+        Procedure Try(i:longint);
+        var  j:char;
+        begin
+            for j:=&apos;(&apos; to &apos;)&apos; do
+             begin
+                 a[i]:=j;
+                 if i=n then Check else Try(i+1);
+             end;
+        end;
+        Begin
+            readln(n); count:=0;
+            try(1);  //s:=&apos;(())&apos;; check;
+            writeln(count);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

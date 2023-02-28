@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleList.html"><div class="header">
+    </div></a>
+    <h1>/QUEEN - Tám hậu
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/115" target="self">http://ntucoder.net/Problem/Details/115</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        //#include &lt;windows.h&gt;
+
+        #include &lt;iostream&gt;
+        using namespace std;
+        #define N 8
+        int y;
+        int x;
+        
+        // ham kiem tra viec dat hau tai vi tris (x,y) co ok khong
+        bool isSafe(int board[][N], int row, int col) {
+          // neu phia ben trai hang hien tai da co quan hau
+          for (int i = 0; i &lt; N; i++) {
+            if (board[row][i] == 1) {
+              return false;
+            }
+          }
+        
+          // kiem tra duong cheo tren (trai)
+          for (int i = row, j = col; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+            if (board[i][j] == 1) {
+              return false;
+            }
+          }
+        
+          // kiem tra duong cheo tren (phai)
+          for (int i = row, j = col; i &gt;= 0 &amp;&amp; j &lt; N; i--, j++) {
+            if (board[i][j] == 1) {
+              return false;
+            }
+          }
+        
+          // kiem tra duong cheo duoi (trai)
+          for (int i = row, j = col; i &lt; N &amp;&amp; j &gt;= 0; i++, j--) {
+            if (board[i][j] == 1) {
+              return false;
+            }
+          }
+        
+          // kiem tra duong cheo duoi (phai)
+          for (int i = row, j = col; i &lt; N &amp;&amp; j &lt; N; i++, j++) {
+            if (board[i][j] == 1) {
+              return false;
+            }
+          }
+        
+        
+          // ok
+          return true;
+        }
+        
+        bool solQueen(int board[][N], int col) {
+          void showResult(int board[][N]);
+        
+          /*cout &lt;&lt; &quot;==========\n&quot;;
+          showResult(board);
+          Sleep(1000);*/
+        
+          /*if (col &lt; 0) {
+            return false;
+          }*/
+        
+          if (col &gt;= N) {
+            return true;
+          }
+        
+          if (col == x - 1) solQueen(board, col + 1);
+          else {
+            // xet tung cot tren ban co lan luot dat hau o cac hang phu hop
+            for (int i = 0; i &lt; N; i++) {
+              if (isSafe(board, i, col)) {
+                board[i][col] = 1; // dat hau o vi tri (i, col)
+                if (solQueen(board, col + 1)) { // dat hau o cot tiep theo dan toi 1 loi giai
+        
+                  return true; // thong bao co loi giai
+                }
+                else {
+                  board[i][col] = 0;
+                }
+              }
+            }
+            //if (col - 1 == x - 1) solQueen(board, col - 2);
+            return false;
+          }
+        }
+        
+        void showResult(int board[][N]) {
+          for (int i = 0; i &lt; N; i++) {
+            for (int j = 0; j &lt; N; j++) {
+              if (board[i][j] == 1) {
+                cout &lt;&lt; &quot;w&quot;;
+              }
+              else {
+                cout &lt;&lt; &quot;.&quot;;
+              }
+            }
+            cout &lt;&lt; endl;
+          }
+        }
+        
+        int main() {
+          cin &gt;&gt; y;
+          cin &gt;&gt; x;
+        
+          int board[N][N] = { 0 };
+          board[y - 1][x - 1] = 1;
+          bool result = solQueen(board, 0);
+          if (result) {
+            showResult(board);
+          }
+          else {
+            cout &lt;&lt; &quot;Loi\n&quot;;
+          }
+          return 0;
+        }</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
