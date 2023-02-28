@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/DAYSO4 - Dãy số (OLP Không chuyên 2008)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3341" target="self">http://ntucoder.net/Problem/Details/3341</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var str:array[0..1000] of ansistring;
+            digit_1,digit_2:ansistring;
+            chr:char;
+            n,i,j,count,remain:longint;
+        Begin
+            readln(n);
+            str[0]:=&apos;0&apos;;
+            for i:=1 to n do
+             begin
+                 str[i]:=&apos;&apos;; digit_1:=&apos;&apos;; digit_2:=&apos;&apos;;
+                 remain:=0;
+                 for chr:=str[i-1][1] to &apos;9&apos; do
+                     if pos(chr,str[i-1])=0 then
+                        begin
+                           digit_1:=chr;
+                           break;
+                        end;
+                 if  digit_1=&apos;&apos; then
+                  begin
+                      for chr:=&apos;1&apos; to &apos;9&apos; do
+                       if pos(chr,str[i-1])=0 then
+                        begin
+                            digit_1:=chr;
+                            break;
+                        end;
+                       remain:=remain+1;
+                  end;
+                 remain:=remain+length(str[i-1])-1;
+                 for chr:=&apos;0&apos; to &apos;9&apos; do
+                  if pos(chr,str[i-1])=0 then
+                   begin
+                       for j:=1 to remain do digit_2:=digit_2+chr;
+                       break;
+                   end;
+                 str[i]:=digit_1+digit_2;
+                 //writeln(str[i]);
+             end;
+             writeln(str[n]);
+             readln;
+        End.
+        (*Nhan xet
+        Cac so chi co 2 chu so
+        Co 2 van de la tim chu so dau tien va cac chu so dang sau deu giong nhau
+        De tim chu so dau tien thi co hai truong hop: truong hop do dai cac so la bang nhau va truong hop do
+                                                        dai cac so phai cong 1 
+        *)</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

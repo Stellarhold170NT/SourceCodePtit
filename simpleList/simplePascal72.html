@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/CODE - Chuyển Mã
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3315" target="self">http://ntucoder.net/Problem/Details/3315</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var st,st1:string; temp1,i:longint; kt:boolean;
+        Begin
+            readln(st);
+            temp1:=ord(st[1]);
+            if (st[1]=&apos;_&apos;) or (st[length(st)]=&apos;_&apos;) then
+            begin
+                write(&apos;Error!&apos;);
+                exit;
+            end;
+            if (pos(&apos;__&apos;,st)&gt;0) then
+            begin
+                write(&apos;Error!&apos;);
+                exit;
+            end;
+            if (temp1&gt;=97) and (temp1&lt;=122) then
+            begin
+                if (pos(&apos;_&apos;,st)&lt;&gt;0) then
+                begin
+                    kt:=true;
+                    for i:=1 to length(st) do
+                    begin
+                        if st[i]&lt;&gt;&apos;_&apos; then
+                        begin
+                            temp1:=ord(st[i]);
+                            if (temp1&lt;97) or (temp1&gt;122) then
+                            begin
+                                kt:=false;
+                                //writeln(&apos;Error!&apos;);
+                                break;
+                            end;
+                        end;
+                    end;
+                    if kt=false then begin writeln(&apos;Error!&apos;); exit; end;
+                    if kt=true then
+                    begin
+                        while (pos(&apos;_&apos;,st)&lt;&gt;0) do
+                        begin
+                            i:=pos(&apos;_&apos;,st);
+                            st[i+1]:=chr(ord(st[i+1])-32);
+                            delete(st,pos(&apos;_&apos;,st),1);
+                        end;
+                        writeln(st); exit;
+                    end;
+                end
+                else
+                if (pos(&apos;_&apos;,st)=0) then
+                begin
+                    st1:=&apos;&apos;;
+                    for i:=1 to length(st) do
+                    begin
+                        if (st[i]&gt;=&apos;A&apos;) and (st[i]&lt;=&apos;Z&apos;) then
+                        begin
+                            st1:=st1+&apos;_&apos;;
+                            st[i]:=chr(ord(st[i])+32);
+                            st1:=st1+st[i];
+                        end
+                        else
+                        st1:=st1+st[i];
+                    end;
+                    writeln(st1); exit;
+                end;
+            end;
+            write(&apos;Error!&apos;);
+            readln;
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/TAPSO - Tập số (OLP Không chuyên 2011)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3350" target="self">http://ntucoder.net/Problem/Details/3350</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var s,temp:string; i,j,k:longint; sum,res,count:int64; check:boolean; a:array[0..10000009] of int64;
+        Begin
+            readln(s);
+            res:=0;
+            for i:=1 to length(s) do sum:=sum+(ord(s[i])-48);
+            if sum mod 3=0 then inc(res);
+            count:=0;
+            for i:=1 to length(s)-1 do  //So ki tu can phai xoa
+             for j:=1 to length(s)-i+1 do //vi tri bat dau xoa
+              begin
+                  sum:=0; check:=false;
+                  temp:=s;
+                  delete(temp,j,i);
+                  for k:=1 to length(temp) do sum:=sum*10+(ord(temp[k])-48);
+                  for k:=1 to count do
+                   if a[k]=sum then begin check:=true; break; end;
+                  if check=false then
+                  begin
+                      inc(count);
+                      a[count]:=sum;
+                  end;
+              end;
+            for k:=1 to count do
+             if a[k] mod 3=0 then inc(res);
+            writeln(res);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

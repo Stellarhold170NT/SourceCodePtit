@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/HIVU - Hình vuông
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/83" target="self">http://ntucoder.net/Problem/Details/83</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  i,j:longint; x,y:array[0..10] of longint;
+             distan_1,distan_2,distan_3,distan_4,distan_5,distan_6,distan_7:longint;
+             check:boolean;
+        Function Di(x,y,x1,y1:longint):longint;
+        begin
+            Di:=sqr(x-x1)+sqr(y-y1);
+        end;
+        Begin
+            check:=true;
+            for i:=1 to 4 do
+             begin
+                readln(x[i],y[i]);
+                for j:=i-1 downto 1 do
+                 if (x[i]=x[j]) and (y[i]=y[j]) then check:=false;
+             end;
+            if check=false then
+             begin
+                 writeln(&apos;NO&apos;);
+                 exit;
+             end;
+            distan_1:=Di(x[1],y[1],x[2],y[2]);
+            distan_2:=Di(x[1],y[1],x[3],y[3]);
+            distan_3:=Di(x[1],y[1],x[4],y[4]);
+            if (distan_1=distan_2) then 
+             begin
+                 distan_4:=Di(x[2],y[2],x[4],y[4]);
+                 distan_5:=Di(x[3],y[3],x[4],y[4]);
+                 if distan_4=distan_5 then
+                  begin
+                      (*La Hinh Thoi*)
+                      distan_6:=Di(x[1],y[1],x[4],y[4]);
+                      distan_7:=Di(x[2],y[2],x[3],y[3]);
+                      if distan_6=distan_7 then
+                       begin
+                           writeln(&apos;YES&apos;);
+                           exit;
+                       end;
+                  end;
+             end
+             else
+             if (distan_1=distan_3) then 
+              begin
+                 distan_4:=Di(x[2],y[2],x[3],y[3]);
+                 distan_5:=Di(x[4],y[4],x[3],y[3]);
+                 if distan_4=distan_5 then
+                  begin
+                      (*La Hinh Thoi*)
+                      distan_6:=Di(x[1],y[1],x[3],y[3]);
+                      distan_7:=Di(x[2],y[2],x[4],y[4]);
+                      if distan_6=distan_7 then
+                       begin
+                           writeln(&apos;YES&apos;);
+                           exit;
+                       end;
+                  end;
+             end
+             else
+             if (distan_2=distan_3) then 
+              begin
+                 distan_4:=Di(x[3],y[3],x[2],y[2]);
+                 distan_5:=Di(x[4],y[4],x[2],y[2]);
+                 if distan_4=distan_5 then
+                  begin
+                      (*La Hinh Thoi*)
+                      distan_6:=Di(x[1],y[1],x[2],y[2]);
+                      distan_7:=Di(x[3],y[3],x[4],y[4]);
+                      if distan_6=distan_7 then
+                       begin
+                           writeln(&apos;YES&apos;);
+                           exit;
+                       end;
+                  end;
+             end;
+             writeln(&apos;NO&apos;);
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

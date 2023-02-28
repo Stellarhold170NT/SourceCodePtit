@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/2048 - Trò chơi 2048
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/1175" target="self">http://ntucoder.net/Problem/Details/1175</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  n,i,j,num,last:longint;
+             a,f:array[0..1000,0..1000] of longint;
+        Begin
+            readln(n);
+            for i:=1 to n do
+             for j:=1 to n do read(a[i,j]);
+        
+            for i:=1 to n do
+             begin
+                last:=n; num:=a[n,i];
+        
+                for j:=n-1 downto 1 do
+                 begin
+                  if a[j,i]&lt;&gt;0 then
+                  begin
+                     if num=0 then num:=a[j,i] else
+                     begin
+                      if num=a[j,i] then
+                       begin
+                           f[last,i]:=num+a[j,i];
+                           dec(last); num:=0;
+                       end
+                       else
+                        if (num&lt;&gt;a[j,i]) then
+                         begin
+                             f[last,i]:=num;
+                             num:=a[j,i];
+                             dec(last);
+                         end;
+                      end;
+                  end;
+        
+                 end;
+                 if num&lt;&gt;0 then f[last,i]:=num;
+             end;
+             for i:=1 to n do
+              begin
+                  for j:=1 to n do write(f[i,j],&apos; &apos;);
+                  writeln;
+              end;
+             readln;
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

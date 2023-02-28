@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/LTXAU - Lũy thừa xâu
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/4481" target="self">http://ntucoder.net/Problem/Details/4481</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var str_a,str_b,str_c,str_d,str_e,str_res,temp:ansistring;
+            i,j,longueur,umi:longint;
+        Begin
+            readln(str_a);
+            readln(str_b);
+            if length(str_a)&gt;length(str_b) then
+             begin
+                 temp:=str_a;
+                 str_a:=str_b;
+                 str_b:=temp;
+             end;
+            longueur:=length(str_a);
+            umi:=length(str_b);
+            str_res:=&apos;&apos;;
+            for i:=1 to longueur do
+             begin
+                 if (longueur mod i=0) and (umi mod i=0) then
+                  begin
+                      str_c:=copy(str_a,1,i);
+                      for j:=1 to longueur div i do str_d:=str_d+str_c;
+                      for j:=1 to umi div i do str_e:=str_e+str_c;
+                      if (str_d=str_a) and (str_e=str_b) then str_res:=str_c;
+                      str_c:=&apos;&apos;; str_d:=&apos;&apos;; str_e:=&apos;&apos;;
+                  end;
+             end;
+            if str_res=&apos;&apos; then writeln(&apos;NO&apos;) else 
+            writeln(str_res);
+            readln;
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

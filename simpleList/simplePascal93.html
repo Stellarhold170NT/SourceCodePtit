@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/BUS - Xe buýt (Codeforces Bayan Warmup)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/92" target="self">http://ntucoder.net/Problem/Details/92</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var n,i,j,temp1:longint; str_a,str_b:string; str_:array[0..10] of string;
+        Begin
+            readln(n);
+            str_a:=&apos;+------------------------+&apos;;
+            str_[1]:=&apos;|#.#.#.#.#.#.#.#.#.#.#.|D|)&apos;;
+            str_[2]:=&apos;|#.#.#.#.#.#.#.#.#.#.#.|.|&apos;;
+            str_[3]:=&apos;|#.......................|&apos;;
+            str_[4]:=&apos;|#.#.#.#.#.#.#.#.#.#.#.|.|)&apos;;
+            str_b:=&apos;+------------------------+&apos;;
+            if n&lt;=4 then temp1:=n else temp1:=4;
+            j:=2; i:=0;
+        
+                 while temp1&lt;&gt;0 do
+                  begin
+                      inc(i);
+                      str_[i][j]:=&apos;O&apos;;
+                      temp1:=temp1-1;
+                  end;
+            j:=4; i:=0;  temp1:=n-4;
+                 if n&gt;4 then
+                  begin
+                      while temp1&lt;&gt;0 do
+                       begin
+                           if i=4 then
+                            begin
+                                i:=1;
+                                inc(j,2);
+                            end
+                            else
+                            inc(i);
+                            if i=3 then inc(i);
+        
+                            str_[i][j]:=&apos;O&apos;;
+                            temp1:=temp1-1;
+        
+                       end;
+                  end;
+            writeln(str_a);
+            writeln(str_[1]);
+            writeln(str_[2]);
+            writeln(str_[3]);
+            writeln(str_[4]);
+            writeln(str_b);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

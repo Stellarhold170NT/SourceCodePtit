@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/BASU - Bắn súng
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/91" target="self">http://ntucoder.net/Problem/Details/91</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var f:array[1..7,1..7] of longint
+                   =((0,0,6,7,6,0,0)
+                    ,(0,6,7,8,7,6,0)
+                    ,(6,7,8,9,8,7,6)
+                    ,(7,8,9,10,9,8,7)
+                    ,(6,7,8,9,8,7,6)
+                    ,(0,6,7,8,7,6,0)
+                    ,(0,0,6,7,6,0,0));
+            i,j,num:longint;
+            s:char;
+            res:longint;
+        
+        Begin
+            res:=0; num:=0;
+            for i:=1 to 7 do
+            begin
+             for j:=1 to 7 do
+             begin
+                 read(s);
+                 if s&lt;&gt;&apos;.&apos; then
+                 begin
+                     num:=ord(s)-ord(&apos;0&apos;);
+                     inc(res,num*f[i,j]);
+                 end;
+             end;
+             readln;
+            end;
+            writeln(res);
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
