@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/ZIZA - Zig Zag
+
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/32" target="self">http://ntucoder.net/Problem/Details/32</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  i,j,n,x,y,hangcheo:longint;
+             a:array[1..100,1..100] of longint;
+        Begin
+            readln(n);
+            x:=1; y:=1; hangcheo:=1;
+            for i:=1 to sqr(n) do
+            begin
+                a[x,y]:=i;
+                if (hangcheo=2) and (x=n) then begin inc(y); hangcheo:=1; end else
+                if (hangcheo=1) and (y=n) then begin inc(x); hangcheo:=2; end else
+                if (hangcheo=2) and (y=1) then begin inc(x); hangcheo:=1; end else
+                if (hangcheo=1) and (x=1) then begin inc(y); hangcheo:=2; end else
+                if (hangcheo=1) then begin dec(x); inc(y); end else
+                begin inc(x); dec(y); end;
+            end;
+            for i:=1 to n do
+            begin
+                for j:=1 to n do write(a[i,j],&apos; &apos;);
+                writeln;
+            end;
+        End.
+            </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

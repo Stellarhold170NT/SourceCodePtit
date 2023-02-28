@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/TIVI - Truyền hình
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/65" target="self">http://ntucoder.net/Problem/Details/65</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var n,i,tg,d,c,kq:longint; a,b:array[1..100000] of longint;
+        Procedure hoanvi(var a,b:longint); var tg:longint; begin tg:=a; a:=b; b:=tg; end;
+        Procedure Sort(l,r:longint);
+        var i,j,x:longint;
+        begin
+            i:=l; j:=r; x:=a[(l+r) div 2];
+            repeat
+                while a[i]&lt;x do inc(i); while (a[j]&gt;x) do dec(j);
+                if i&lt;=j then begin Hoanvi(a[i],a[j]); hoanvi(b[i],b[j]); inc(i); dec(j) end;
+            until i&gt;j;
+            if j&gt;l then sort(l,j); if i&lt;r then sort(i,r);
+        end;
+        Begin
+            readln(n);
+            for i:=1 to n do begin
+                readln(a[i],b[i]);
+            end; sort(1,n);
+            kq:=0;
+            for i:=1 to n do
+            begin
+                d:=i+1; c:=n;
+                while d&lt;=c do
+                begin
+                    tg:=(d+c) div 2;
+                    if a[tg]&lt;b[i] then d:=d+1 else c:=c-1;
+                end;       //writeln(tg,&apos; &apos;,d);
+                kq:=kq+(d-i-1);
+            end;
+            writeln(kq);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

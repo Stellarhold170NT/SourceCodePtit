@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/CARO - Cờ caro
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3274" target="self">http://ntucoder.net/Problem/Details/3274</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var n,i,j,d,kt,o:longint; s:array[1..10000] of string;
+            xau:string;
+        Procedure Check(d:longint; s:string);
+        begin
+            if d&gt;=5 then
+            begin
+                if s=&apos;x&apos; then writeln(&apos;Ti wins&apos;)
+                   else writeln(&apos;Teo wins&apos;);
+                kt:=1;
+            end;
+        end;
+        Begin
+            readln(n);
+            kt:=0;
+            for i:=1 to n do readln(s[i]);
+            for i:=1 to n do
+            begin
+              xau:=s[i]; d:=1;
+              for j:=1 to n do //hang ngang
+              begin
+                   if (xau[j]=xau[j+1]) and (xau[j]&lt;&gt;&apos;.&apos;) and (xau[j+1]&lt;&gt;&apos;.&apos;)
+                   and (xau[j]&lt;&gt;&apos;&apos;) and (xau[j+1]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                   Check(d,xau[j]);
+                   if kt=1 then exit;
+              end;
+              d:=1;
+              for j:=1 to n do //hang doc
+              begin
+                  if (s[j][i]=s[j+1][i]) and (s[j][i]&lt;&gt;&apos;.&apos;) and (s[j+1][i]&lt;&gt;&apos;.&apos;)
+                  and (s[j][i]&lt;&gt;&apos;&apos;) and (s[j+1][i]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                  Check(d,s[j][i]);
+                  if kt=1 then exit;
+              end;
+            end;
+            for o:=1 to n do     //hang cheo \
+            begin
+                j:=1; d:=1; i:=o;
+                while (j&lt;=n) and (i&lt;=n) do
+                begin
+                    if (s[j][i]=s[j+1][i+1]) and (s[j][i]&lt;&gt;&apos;.&apos;) and (s[j+1][i+1]&lt;&gt;&apos;.&apos;)
+                    and (s[j][i]&lt;&gt;&apos;&apos;) and (s[j+1][i+1]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                    Check(d,s[j][i]);
+                    if kt=1 then begin  exit; end;
+                    inc(j); inc(i);
+                end;
+            end;
+            o:=2;
+            if o&lt;=n then
+            begin
+                for o:=2 to n do
+                begin
+                     j:=o; i:=1;
+                     d:=1;
+                     while (j&lt;=n) and (i&lt;=n) do
+                     begin
+                         if (s[j][i]=s[j+1][i+1]) and (s[j][i]&lt;&gt;&apos;.&apos;) and (s[j+1][i+1]&lt;&gt;&apos;.&apos;)
+                         and (s[j][i]&lt;&gt;&apos;&apos;) and (s[j+1][i+1]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                         Check(d,s[j][i]);
+                         if kt=1 then exit;
+                         inc(j); inc(i);
+                     end;
+                end;
+            end;
+            for o:=n downto 1 do  // hang cheo /
+            begin
+                j:=1; i:=o; d:=1;
+                while (j&lt;=n) and (i&gt;=1) do
+                begin
+                    if (s[j][i]=s[j+1][i-1]) and (s[j][i]&lt;&gt;&apos;.&apos;) and (s[j+1][i-1]&lt;&gt;&apos;.&apos;)
+                    and (s[j][i]&lt;&gt;&apos;&apos;) and (s[j+1][i-1]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                    Check(d,s[j][i]);
+                    if kt=1 then exit;
+                    inc(j); dec(i);
+                end;
+            end;
+            o:=2;
+            if o&lt;=n then
+            begin
+                for o:=2 to n do
+                begin
+                    j:=o; i:=n; d:=1;
+                    while (j&lt;=n) and (i&gt;=1) do
+                    begin
+                        if (s[j][i]=s[j+1][i-1]) and (s[j][i]&lt;&gt;&apos;.&apos;) and (s[j+1][i-1]&lt;&gt;&apos;.&apos;)
+                        and (s[j][i]&lt;&gt;&apos;&apos;) and (s[j+1][i-1]&lt;&gt;&apos;&apos;) then inc(d) else d:=1;
+                        Check(d,s[j][i]);
+                        if kt=1 then exit;
+                        inc(j); dec(i);
+                    end;
+                end;
+            end;
+            writeln(&apos;Not yet&apos;);
+            readln;
+        
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

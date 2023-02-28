@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/NGTO5 - Nguyên tố - nguyên tố cùng nhau
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3257" target="self">http://ntucoder.net/Problem/Details/3257</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var t,i,n,j,k,dem:longint;
+            arr,kt1:array[0..100000] of boolean;
+        Procedure SANG;
+        var i,j:longint;
+        begin
+            fillchar(arr,sizeof(arr),true);
+            arr[1]:=false; arr[0]:=false;
+            for i:=2 to trunc(sqrt(100000)) do
+            if arr[i] then begin
+                j:=i*i;
+                while j&lt;=100000 do
+                begin
+                    arr[j]:=false;
+                    j:=j+i;
+                end;
+            end;
+        end;
+        Function Phantich(n:longint):longint;
+        var k,t,d,y,kt,n1,d1,k1:longint;
+        begin
+            d:=0; kt:=0; d1:=0; n1:=n; fillchar(kt1,sizeof(kt1),false);
+            if (n mod 2=0) then begin k:=2; //d:=d*n1 div k;
+            while (n mod 2=0) do begin n:=n div k; end;
+            k1:=k;
+            while k&lt;=n1 do begin
+             if kt1[k]=false then begin kt1[k]:=true; inc(d); end;
+             k:=k+k1;
+            end; end;
+            k1:=0; k:=0;
+            if (n mod 3=0) then begin k:=3; //d:=d*n1 div k;
+            while (n mod k=0) do begin  n:=n div k; end;
+            k1:=k;
+            while k&lt;=n1 do begin
+               if kt1[k]=false then begin inc(d); kt1[k]:=true; end;
+               k:=k+k1;
+            end;end;
+            k1:=0; k:=0;
+            y:=5;t:=2;
+            while y&lt;=trunc(sqrt(n)) do begin
+                k:=y; //d:=d*n1 div k;
+                if (n mod k=0) then begin
+                while (n mod k=0) do begin inc(d1); n:=n div k; end;
+                k1:=k;
+                while (k&lt;=n1) do begin
+                    if kt1[k]=false then begin inc(d); kt1[k]:=true; end;
+                    k:=k+k1
+                end;end;
+                y:=y+t; t:=6-t;
+            end;
+            if (n&gt;1)  then begin
+                k:=n;
+                k1:=k;
+                while (k&lt;=n1) do begin
+                    if kt1[k]=false then begin kt1[k]:=true; inc(d); end;
+                    k:=k+k1;
+                end;
+            end;
+            phantich:=(d);
+        end;
+        function kt(x:int64):integer;
+        var i:longint;
+        begin
+             if x&lt;2 then exit(0);
+             if x=2 then exit(1);
+             for i:=2 to trunc(sqrt(x)) do
+             if x mod i=0 then exit(0);
+             exit(1);
+        end;
+        function UCLN(a,b:int64):int64;
+        var tam:int64;
+        begin
+              while b&gt;0 do
+              begin
+                    tam:=a mod b;
+                    a:=b;
+                    b:=tam;
+              end;
+              exit(a);
+        end;
+        Begin
+            SANG;
+            readln(t);
+        
+            for i:=1 to t do
+            begin
+                readln(n);
+                //writeln(phantich(n));
+                if (arr[n-phantich(n)]=true) then writeln(TRUE) else writeln(FALSE);
+                (*dem:=0;
+                     for j:=1 to n do
+                     begin
+        
+                          if UCLN(j,n)=1 then inc(dem);
+                     end;
+                     if kt(dem)=1 then writeln(&apos;TRUE&apos;) else writeln(&apos;FALSE&apos;);*)
+            end;
+        
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

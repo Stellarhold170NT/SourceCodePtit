@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/ANTRA - Ăn trắng
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/4397" target="self">http://ntucoder.net/Problem/Details/4397</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var i,d,doi:longint;
+            s:string;
+            count:array[1..15] of integer;
+            v:array[&apos;0&apos;..&apos;Z&apos;] of integer;
+        Begin
+            FILLCHAR(COUNT,SIZEOF(COUNT),0);
+            v[&apos;3&apos;]:=3; v[&apos;4&apos;]:=4; v[&apos;5&apos;]:=5;
+            v[&apos;6&apos;]:=6; v[&apos;7&apos;]:=7; v[&apos;8&apos;]:=8; v[&apos;9&apos;]:=9;
+            v[&apos;T&apos;]:=10; v[&apos;J&apos;]:=11; v[&apos;Q&apos;]:=12; v[&apos;K&apos;]:=13; v[&apos;A&apos;]:=14; v[&apos;2&apos;]:=15;
+        
+            for i:=1 to 13 do //Nhap 13 quan bai
+            begin
+                readln(s);
+                inc(count[v[s[1]]]);
+            end;
+            //for i:=3 to 15 do writeln(count[i]);
+             if count[15]=4 then begin
+                  write(&apos;YES&apos;);
+                  exit;
+              end;
+               d:=0;
+            for i:=3 to 15 do
+              if count[i]&gt;0 then inc(d);
+              if d=13 then begin
+                  write(&apos;YES&apos;);
+                  exit;
+              end;
+        
+        
+            for i:=3 to 11 do
+              if (count[i]&gt;1) and (count[i+1]&gt;1) and (count[i+2]&gt;1) and (count[i+3]&gt;1) and (count[i+4]&gt;1)
+              then
+              begin
+                  write(&apos;YES&apos;);
+                  exit;
+              end;
+              doi:=0;
+            for i:=3 to 15 do
+               doi:=doi+count[i] div 2;
+               if doi=6 then begin
+                   write(&apos;YES&apos;);
+                   exit;
+               end;
+        
+            write(&apos;NO&apos;);
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

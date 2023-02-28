@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/QUANMA - Quân Mã (Olympic 30/4 XXII Khối 10)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/5539" target="self">http://ntucoder.net/Problem/Details/5539</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        type ToaDo = Record
+               x,y:longint;
+             end;
+        Var n,m,x1,x2,y1,y2:longint;
+            i,j:longint;
+            b,k:longint;
+            Q:array[1..10000000] of ToaDo; sx,sy:longint; soluong:longint;
+            a:array[-100..1001,-100..1001] of integer;
+        Procedure LanToa;
+        begin
+            b:=1; k:=1;
+            Q[1].x:=x1;
+            Q[1].y:=y1;
+            while b&lt;=k do
+             begin
+                 sx:=Q[b].x;
+                 sy:=Q[b].y;
+                 soluong:=a[sx,sy];
+                 //--1
+                 if (sx+2&lt;=n) and (sy+1&lt;=m) and (a[sx+2,sy+1]=0) then
+                  begin
+                       a[sx+2,sy+1]:=soluong+1;
+                       //-----
+                       inc(k);
+                       Q[k].x:=sx+2; Q[k].y:=sy+1;
+                       //-----
+                       if (sx+2=x2) and (sy+1=y2) then exit;
+                  end;
+                 //--2
+                 if (sx+1&lt;=n) and (sy+2&lt;=m) and (a[sx+1,sy+2]=0) then
+                  begin
+                      a[sx+1,sy+2]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx+1; Q[k].y:=sy+2;
+                      //-----
+                      if (sx+1=x2) and (sy+2=y2) then exit;
+                  end;
+                 //--3
+                 if (sx-1&gt;=1) and (sy+2&lt;=m) and (a[sx-1,sy+2]=0) then
+                  begin
+                      a[sx-1,sy+2]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx-1; Q[k].y:=sy+2;
+                      //-----
+                      if (sx-1=x2) and (sy+2=y2) then exit;
+                  end;
+                 //--4
+                 if (sx-2&gt;=1) and (sy+1&lt;=m) and (a[sx-2,sy+1]=0) then
+                  begin
+                      a[sx-2,sy+1]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx-2; Q[k].y:=sy+1;
+                      //-----
+                      if (sx-2=x2) and (sy+1=y2) then exit;
+                  end;
+                 //--5
+                 if (sx-2&gt;=1) and (sy-1&gt;=1) and (a[sx-2,sy-1]=0) then
+                  begin
+                      a[sx-2,sy-1]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx-2; Q[k].y:=sy-1;
+                      //-----
+                      if (sx-2=x2) and (sy-1=y2) then exit;
+                  end;
+                 //--6
+                 if (sx-1&gt;=1) and (sy-2&gt;=1) and (a[sx-1,sy-2]=0) then
+                  begin
+                      a[sx-1,sy-2]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx-1; Q[k].y:=sy-2;
+                      //-----
+                      if (sx-1=x2) and (sy-2=y2) then exit;
+                  end;
+                 //--7
+                 if (sx+1&lt;=n) and (sy-2&gt;=1) and (a[sx+1,sy-2]=0) then
+                  begin
+                      a[sx+1,sy-2]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx+1; Q[k].y:=sy-2;
+                      //-----
+                      if (sx+1=x2) and (sy-2=y2) then exit;
+                  end;
+                 //--8
+                 if (sx+2&lt;=n) and (sy-1&gt;=1) and (a[sx+2,sy-1]=0) then
+                  begin
+                      a[sx+2,sy-1]:=soluong+1;
+                      //-----
+                      inc(k);
+                      Q[k].x:=sx+2; Q[k].y:=sy-1;
+                      //-----
+                      if (sx+2=x2) and (sy-1=y2) then exit;
+                  end;
+                 //---Xet Tiep
+                 inc(b);
+             end;
+        end;
+        Begin
+            readln(n,m);
+            readln(x1,y1);
+            readln(x2,y2);
+            for i:=1 to n do
+             for j:=1 to m do a[i,j]:=0;
+            LanToa;
+            if a[x2,y2]=0 then writeln(-1) else writeln(a[x2,y2]);
+            readln;
+        
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

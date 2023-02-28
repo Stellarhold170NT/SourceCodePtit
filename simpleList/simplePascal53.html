@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/CLOA - Thành Cổ Loa
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/33" target="self">http://ntucoder.net/Problem/Details/33</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Var  a:array[0..100,0..100] of longint;
+             n,i,j,num,d,b:longint;
+        Procedure Ghi;
+        var i,j:longint;
+        begin
+            for i:=1 to n do
+            begin
+                for j:=1 to n do write(a[i,j],&apos; &apos;);
+                writeln;
+            end;
+        end;
+        Procedure TCL(d,b:longint);
+        var i:longint;
+        begin
+             inc(d); inc(b);
+             for i:=b to n-b+1 do begin //luu chu so hang tren
+                 inc(num);
+                 a[d,i]:=num;
+             end;
+             for i:=d+1 to n-d+1 do begin  //luu chu so cot ben phai
+                 inc(num);
+                 a[i,n-b+1]:=num;
+             end;
+             for i:=n-b downto b do //luu chu so hang duoi
+             begin
+                 inc(num);
+                 a[n-d+1,i]:=num;
+             end;
+             for i:=n-d downto d+1 do  //luu chu so cot ben trai
+             begin
+                 inc(num);
+                 a[i,b]:=num;
+             end;  ;
+             if ((n mod 2=0) and (n div 2=d)) or ((n mod 2=1) and (n div 2+1=d))
+                then exit else TCL(d,b);
+        end;
+        Begin
+            (* ban chat cua bai la sap xep vong trong mang hai chieu voi cac vong bat dau tu o [i,j],[i+1,j+1],[i+2,j+2]..vv*) 
+            readln(n);
+            num:=0; d:=0; b:=0;
+            TCL(d,b); ghi;
+            readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/PLOI - Phạm lỗi
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3330" target="self">http://ntucoder.net/Problem/Details/3330</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt;
+        Type    Pnode=^Tnode;
+                Tnode=record
+                        info:byte;
+                        link:Pnode;
+                end;
+        Var     n:^integer;
+                first,last,newp,f,l:Pnode;
+                count:array[1..11] of byte = (0,0,0,0,0,0,0,0,0,0,0);
+                d:integer;
+        Begin
+                new(n);
+                readln(n^);
+                First:=nil;
+                Last:=nil;
+                while n^&lt;&gt;0 do
+                begin
+                        new(newp);
+                        read(newp^.info);
+                        newp^.link:=nil;
+                        if first=nil then
+                                first:=newp
+                        else
+                                last^.link:=newp;
+                        last:=newp;
+                        inc(count[last^.info]);
+                        if (count[last^.info]=3) then
+                        begin
+                                if (f=nil) then
+                                        f:=Last
+                                else
+                                        l^.link:=last;
+                                l:=last;
+                                inc(d);
+                                count[last^.info]:=0; 
+                        end;
+                        n^:=n^-1;
+                end;
+                writeln(d);
+                newp:=f; l^.link:=nil;
+                while newp&lt;&gt;nil do
+                begin
+                        write(newp^.info,&apos; &apos;);
+                        newp:=newp^.link;
+                end;
+                readln;
+        End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

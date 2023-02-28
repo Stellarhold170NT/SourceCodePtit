@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/DAUGIA - Đấu giá (OLP Không chuyên 2010)
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/3346" target="self">http://ntucoder.net/Problem/Details/3346</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        USES CRT;
+        var     NT:array[1..5000000] of boolean;
+                a,b,i,dem:longint;
+PROCEDURE ERAS;
+var i,temp1:longint;
+begin
+    fillchar(NT,sizeof(NT),true);
+    for i:=2 to 316 do
+    if NT[i]=true then begin
+        temp1:=i;
+        while temp1&lt;=100000 do begin
+            inc(temp1,i);
+            NT[temp1]:=false;
+        end;
+    end;
+end;
+FUNCTION PALIN (n:longint):boolean;
+var i:longint;
+    s:string;
+begin
+    str(n,s);
+    for i:=1 to length(s) do
+    if s[i]&lt;&gt;s[length(s)-i+1] then exit(false);
+    exit(true);
+end;
+                begin
+                    ERAS;
+                    readln(a,b);
+                    dem:=0;
+                    for i:=a to b do
+                    if (NT[i]) and (PALIN(i)) then inc(dem);
+                    writeln(dem);
+                    readln
+                end.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

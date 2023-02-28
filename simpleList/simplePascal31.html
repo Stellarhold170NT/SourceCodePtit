@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="simpleListPascal.html"><div class="header">
+    </div></a>
+    <h1>/QN - QN-Chính Phương
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/4454" target="self">http://ntucoder.net/Problem/Details/4454</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Var     n,i,a:longint;
+        temp:real;
+        kt:array[0..31622] of boolean;
+Begin
+        readln(n);
+        for i:=1 to n do
+        begin
+                read(a);
+                temp:=sqrt(a);
+                if (temp=trunc(temp)) then kt[trunc(temp)]:=true;
+        end;
+        for i:=0 to 31622 do
+        if kt[i]=false then
+        begin
+                writeln(i*i);
+                break;
+        end;
+End.
+--------------------------
+Cách 2 (Dùng con trỏ)
+Uses Crt;
+Type //Pnode=TNode
+        Tnode=record
+            info,check:longint;
+            pre,link:integer;
+        end;
+        Tlist=array[-1..31623] of Tnode;
+Var     node:Tlist;
+        First,last:integer;
+        n,i,d:^integer;
+        c:^real;
+        a:^longint;
+Begin
+        new(n);
+        readln(n^);
+        new(i);
+        i^:=0;
+        first:=0; last:=31622;
+        while i^&lt;=31622 do
+        begin
+            Node[i^].info:=i^;
+            Node[i^].check:=0;
+            Node[i^].pre:=i^-1;
+            Node[i^].link:=i^+1;
+            i^:=i^+1;
+        end;
+        while n^&lt;&gt;0 do
+        begin
+            new(a);
+            read(a^);
+            new(c); new(d);
+            c^:=sqrt(a^);
+            d^:=trunc(c^);
+            if (frac(c^)=0) and (Node[d^].check=0) then
+            With Node[d^] do
+            begin
+                if (Node[first].link=Node[d^].link) then
+                begin
+                    Node[d^].check:=1;
+                    first:=Node[Node[d^].link].info;
+                    Node[first].pre:=-1;
+                end
+                else
+                begin
+                    if (Node[last].link=Node[d^].link) then
+                    begin
+                        last:=Node[node[d^].pre].info;
+                        node[last].link:=31623;
+                        node[d^].check:=1;
+                    end
+                    else
+                        begin
+                            Node[Node[d^].pre].link:=Node[node[d^].link].info;
+                            Node[node[d^].link].pre:=node[node[d^].pre].info;
+                            Node[d^].check:=1;
+                        end;
+                end;
+            end;
+            n^:=n^-1;
+        end;   //writeln(&apos;-&apos;);
+        writeln(Node[first].info*Node[first].info);
+        readln;
+
+End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
