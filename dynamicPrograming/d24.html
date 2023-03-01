@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Bàn cờ tướng
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/bchess" target="self">https://oj.vnoi.info/problem/bchess</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #include &lt;iostream&gt;
+      using namespace std;
+      
+      #define MAX 2001
+      
+      int main() {
+        int n;
+        cin &gt;&gt; n;
+      
+        char ch[MAX][MAX];
+      
+        for (int i = 1; i &lt;= n; i++) {
+          for (int j = 1; j &lt;= n; j++) {
+            cin &gt;&gt; ch[i][j];
+          }
+        }
+      
+        int f[MAX][MAX];
+      
+        for (int i = 1; i &lt;= n; i++) {
+          f[1][i] = 1;
+          f[i][1] = 1;
+        }
+      
+        int m1 = 0, m2 = 0, m3 = 0;
+        int c1 = 0, c2 = 0, c3 = 0;
+      
+      
+        // 1 - den, 0 - trang
+        for (int i = 2; i &lt;= n; i++) {
+          for (int j = 2; j &lt;= n; j++) {
+            if (ch[i - 1][j - 1] == ch[i][j] &amp;&amp; ch[i - 1][j] != ch[i][j]
+              &amp;&amp; ch[i][j - 1] != ch[i][j])
+              f[i][j] = min(min(f[i - 1][j - 1], f[i - 1][j]), f[i][j - 1]) + 1;
+            else f[i][j] = 1;
+            if (ch[i][j] == &apos;1&apos; &amp;&amp; m2 &lt; f[i][j] - 1 + f[i][j] % 2) {
+              m2 = f[i][j] - 1 + f[i][j] % 2;
+            }
+      
+            if (ch[i][j] == &apos;0&apos; &amp;&amp; m3 &lt; f[i][j] - 1 + f[i][j] % 2) {
+              m3 = f[i][j] - 1 + f[i][j] % 2;
+            }
+      
+            if (m1 &lt; f[i][j] - f[i][j] % 2) {
+              m1 = f[i][j] - f[i][j] % 2;
+            }
+          }
+        }
+      
+        for (int i = 1; i &lt;= n; i++) {
+          for (int j = 1; j &lt;= n; j++) {
+            if (m1 != 0 &amp;&amp; m1 &lt;= f[i][j]) c1++;
+            if (m2 != 0 &amp;&amp; ch[i][j] == &apos;1&apos; &amp;&amp; m2 &lt;= f[i][j]) c2++;
+            if (m3 != 0 &amp;&amp; ch[i][j] == &apos;0&apos; &amp;&amp; m3 &lt;= f[i][j]) c3++;
+          }
+        }
+      
+        cout &lt;&lt; m1 &lt;&lt; &quot; &quot; &lt;&lt; c1 &lt;&lt; endl;
+        cout &lt;&lt; m2 &lt;&lt; &quot; &quot; &lt;&lt; c2 &lt;&lt; endl;
+        cout &lt;&lt; m3 &lt;&lt; &quot; &quot; &lt;&lt; c3 &lt;&lt; endl;
+      
+      
+        return 0;
+      }
+      </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

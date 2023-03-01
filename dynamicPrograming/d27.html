@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/VOI 22 Bài 2 - Đặc trưng đồ thị
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/voi22_graph" target="self">https://oj.vnoi.info/problem/voi22_graph</a>
+    <div class="code">
+    <pre>
+      <code class="language-c">        #define _CRT_SECURE_NO_WARNINGS
+
+      #include &lt;iostream&gt;
+      using namespace std;
+      
+      #define LIM 1000000007
+      
+      const int MAX = 2001;
+      
+      int main() {
+      
+        if (fopen(&quot;GRAPH.INP&quot;, &quot;r&quot;)) {
+          freopen(&quot;GRAPH.INP&quot;, &quot;r&quot;, stdin);
+          freopen(&quot;GRAPH.OUT&quot;, &quot;w&quot;, stdout);
+        }
+      
+        int n, b;
+        cin &gt;&gt; n &gt;&gt; b;
+      
+        int* a = new int[n + 1];
+      
+        for (int i = 1; i &lt;= n; i++) {
+          cin &gt;&gt; a[i];
+        }
+      
+        int f[MAX][MAX];
+      
+        for (int i = 0; i &lt; MAX; i++) {
+          for (int j = 0; j &lt; MAX; j++) {
+            f[i][j] = 0;
+          }
+        }
+      
+        // a[1] luon phai la 0 nen ta khoi tao f[1][0 -&gt; b] = 1;
+        for (int i = 0; i &lt;= b; i++) {
+          f[1][i] = 1;
+        }
+      
+        for (int i = 2; i &lt;= n; i++) {
+          for (int gz = 0; gz &lt;= n - i; gz++) {
+            if (a[i] != -1) {
+              if (a[i] &lt; i &amp;&amp; a[i] + gz &lt;= b) {
+                f[i][gz] = f[i - 1][gz + (a[i] &gt; 0)];
+              }
+            }
+            else {
+              if (gz &lt;= b) {
+                int cnt = min(i - 1, b - gz); // f[i] thuoc doan [0,cnt];
+                if (cnt &gt;= 0) {
+                  f[i][gz] = f[i - 1][gz];
+                  f[i][gz] += (long long)cnt * f[i - 1][gz + 1] % LIM;
+                  f[i][gz] = f[i][gz] % LIM;
+                }
+              }
+            }
+          }
+        }
+      
+      /*for (int i = 1; i &lt;= n; i++) {
+        for (int gz = 0; gz &lt;= n; gz++) {
+          cout &lt;&lt; f[i][gz] &lt;&lt; &quot; &quot;;
+        }
+        cout &lt;&lt; endl;
+      }*/
+      
+      cout &lt;&lt; f[n][0] % LIM &lt;&lt; endl;
+      
+      return 0;
+      }
+      </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

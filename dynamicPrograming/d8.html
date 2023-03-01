@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/DAYSO2 - Dãy số 2 (OLPCĐ 2014)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/125" target="self">http://ntucoder.net/Problem/Details/125</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt,Math;
+      Var n,i:longint;
+          kq:int64;
+          a,t,f:array[-10..1000000] of int64;
+      Begin
+          readln(n);
+          t[0]:=0;
+          for i:=1 to n do
+           begin
+               read(a[i]);
+               t[i]:=t[i-1]+a[i];
+           end;
+          kq:=-maxlongint;
+          for i:=3 to n do
+           begin
+               f[i]:=f[i-3]+(t[i]-t[i-3]);
+               kq:=max(kq,f[i]);
+               if f[i]&lt;0 then f[i]:=0;
+           end;
+          writeln(kq);
+          readln;
+      End.
+          </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

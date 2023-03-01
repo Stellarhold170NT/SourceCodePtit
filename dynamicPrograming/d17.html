@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/VERSUSGAME - Trò chơi đối kháng
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/5564" target="self">http://ntucoder.net/Problem/Details/5564</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt,math;
+      Var a,b,c,d:array[0..2000000] of longint;
+          i,j,n,max,k:longint;
+      Begin
+          readln(n);
+          for i:=1 to n do
+          begin
+              readln(c[i]);
+              if c[i]&gt;max then max:=c[i]; //Quy hoach dong chi xet den max
+          end;
+          a[1]:=1; a[2]:=3; a[3]:=5; a[4]:=10; a[5]:=15; a[6]:=19;
+          b[1]:=1; b[2]:=1; b[3]:=2; b[4]:=1; b[5]:=2; b[6]:=3;
+          for i:=1 to max do
+          begin
+              d[i]:=maxlongint; //khoi tao
+              for j:=1 to 6 do
+              begin
+                  k:=a[j];
+                  if (i-k&gt;=0) then
+                  begin
+                      d[i]:=min(d[i],d[i-k]+b[j]);
+                      //Vd d[30]=d[20]+19 (a[6]) toi uu hon la d[30]=d[21]+19 
+                  end;
+              end;
+          end;
+          for i:=1 to n do writeln(d[c[i]]);
+          readln;
+      End.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
