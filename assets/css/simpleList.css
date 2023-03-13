@@ -44,3 +44,24 @@ a:hover {
   background-repeat: no-repeat;
   display: block;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #403f40;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9c9c9c;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
