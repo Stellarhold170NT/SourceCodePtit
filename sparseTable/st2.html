@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Dãy cấp số cộng
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/avlbit" target="self">https://oj.vnoi.info/problem/avlbit</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;cmath&gt;
+        #include &lt;numeric&gt;
+        #include &lt;map&gt;
+        using namespace std;
+        
+        using Condition = int (*) (int, int);
+        
+        #define MAX_SIZE 100010
+        
+        class SparseTable {
+          int table[17][MAX_SIZE];
+        
+        public:
+          void buildTable(int* data, int length, Condition condition) {
+            //memcpy(table[0], data, sizeof(table[0]));
+            for (int i = 1; i &lt;= length; i++) {
+              table[0][i] = data[i];
+            }
+        
+            int lg = log(length) / log(2);
+        
+            for (int j = 1; j &lt;= lg; j++) {
+              for (int i = 1; i &lt;= length - (1 &lt;&lt; j) + 1; i++) {
+                table[j][i] = condition(table[j - 1][i], table[j - 1][i + (1 &lt;&lt; (j - 1))]);
+              }
+            }
+          }
+        
+          inline int query(int left, int right, Condition condition) {
+            int len = right - left + 1;
+            int k = log(len) / log(2);
+        
+            int result = condition(table[k][left], table[k][right - (1 &lt;&lt; k) + 1]);
+            return result;
+          }
+        };
+        
+        int Max(int a, int b);
+        int Min(int a, int b);
+        int Gcd(int a, int b);
+        
+        int main() {
+          int n, q;
+          cin &gt;&gt; n &gt;&gt; q;
+        
+          int* arr = new int[n + 1];
+          for (int i = 1; i &lt;= n; i++) {
+            cin &gt;&gt; arr[i];
+          }
+        
+          SparseTable FindMax, FindMin, FindPos, FindGcd;
+        
+          FindMax.buildTable(arr, n, Max);
+          FindMin.buildTable(arr, n, Min);
+        
+          int* subtract = new int[n];
+          for (int i = 1; i &lt;= n - 1; i++) {
+            subtract[i] = arr[i + 1] - arr[i];
+          }
+        
+          FindGcd.buildTable(subtract, n - 1, Gcd);
+        
+          int* appearance = new int[n + 1];
+          for (int i = 0; i &lt;= n; i++) appearance[i] = n + 1;
+        
+          map&lt;int, int&gt; iDex;
+        
+          for (int i = 1; i &lt;= n; i++) {
+            int pos = iDex[arr[i]];
+            if (pos &gt; 0) appearance[pos] = i;
+            iDex[arr[i]] = i;
+          }
+        
+          FindPos.buildTable(appearance, n, Min);
+        
+          while (q--) {
+            int left, right;
+            cin &gt;&gt; left &gt;&gt; right;
+        
+            int maxInRange = FindMax.query(left, right, Max);
+            int minInRange = FindMin.query(left, right, Min);
+        
+            if (maxInRange == minInRange) {
+              cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;
+            }
+            else {
+              int len = right - left + 1;
+        
+              if ((maxInRange - minInRange) % (len - 1) == 0) {
+                int dist = (maxInRange - minInRange) / (len - 1);
+        
+                int pos = FindPos.query(left, right, Min);
+                int gcdNum = abs(FindGcd.query(left, right - 1, Gcd));
+        
+                if (pos &gt; right &amp;&amp; gcdNum == dist) {
+                  cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl;
+                }
+                else {
+                  cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;
+                }
+              }
+              else {
+                cout &lt;&lt; &quot;NO&quot; &lt;&lt; endl;
+              }
+            }
+          }
+        
+          return 0;
+        }
+        
+        int Max(int a, int b) {
+          return (a &gt;= b) ? a : b;
+        }
+        int Min(int a, int b) {
+          return (a &lt;= b) ? a : b;
+        }
+        int Gcd(int a, int b) {
+          while (b != 0) {
+            int r = a % b;
+            a = b;
+            b = r;
+          }
+          return a;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
