@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Giá trị lớn nhất ver2
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/qmax2" target="self">https://oj.vnoi.info/problem/qmax2</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;cmath&gt;
+        using namespace std;
+        
+        int n;
+        long long arr[50001];
+        
+        
+        /*
+          Nguoi ta chung minh duoc rang mang tree chi can n * 4
+          phan tu la duoc
+        */
+        long long tree[50001 * 4];
+        long long lazy[50001 * 4];
+        
+        void update(int index, int left, int right, int a, int b, int val) {
+          // neu left va right nam ngoai han doan [a,b]
+          if (right &lt; a || left &gt; b) return;
+        
+          if (left &gt;= a &amp;&amp; right &lt;= b) {
+            tree[index] += val;
+            lazy[index] += val;
+            return;
+          }
+        
+          int mid = (left + right) / 2;
+          update(index * 2, left, mid, a, b, val);
+          update(index * 2 + 1, mid + 1, right, a, b, val);
+        
+          tree[index] = max(tree[index * 2], tree[index * 2 + 1]) + lazy[index];
+        }
+        
+        // lay gia tri lon nhat trong doan a, b
+        int getVal(int index, int left, int right, int a, int b) {
+          if (right &lt; a || left &gt; b) return -1;
+        
+          if (left &gt;= a &amp;&amp; right &lt;= b) {
+            return tree[index];
+          }
+        
+          int mid = (left + right) / 2;
+          return max(getVal(index * 2, left, mid, a, b), getVal(index * 2 + 1, mid + 1, right, a, b)) + lazy[index];
+        
+        }
+        
+        
+        int main() {
+          int n, m;
+          cin &gt;&gt; n &gt;&gt; m;
+        
+          for (int i = 1; i &lt;= n; i++) arr[i] = 0;
+        
+          for (int i = 1; i &lt;= m; i++) {
+            int a, l, r, k;
+            cin &gt;&gt; a &gt;&gt; l &gt;&gt; r;
+            if (a == 0) cin &gt;&gt; k;
+        
+            if (a == 0) {
+              update(1, 1, n, l, r, k);
+            }
+            else {
+              cout &lt;&lt; getVal(1, 1, n, l, r) &lt;&lt; endl;
+            }
+          }
+        
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
