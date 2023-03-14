@@ -236,6 +236,25 @@ a {
   display: block;
 }
 
+.task-3-link {
+  position: absolute;
+  width: 120px;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.task-3 {
+  position: absolute;
+  top: 11%;
+  left: 57.5%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #dae3f3;
+  display: block;
+}
+
 .task-1-lv2 {
   position: absolute;
   top: 28%;
@@ -273,6 +292,64 @@ a {
   transform: translateX(-50%);
 }
 
+.task-1-lv2-row2 {
+  position: absolute;
+  top: 36%;
+  left: 34.5%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #203864;
+  display: block;
+}
+
+.task-1-lv2-row2Link {
+  position: absolute;
+  width: 125px;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.task-2-lv2-row2 {
+  position: absolute;
+  top: 36%;
+  left: 46%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #203864;
+  display: block;
+}
+
+.task-2-lv2-row2Link {
+  position: absolute;
+  width: 100px;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.task-1-lv2-row3 {
+  position: absolute;
+  top: 43%;
+  left: 34.5%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #203864;
+  display: block;
+}
+
+.task-1-lv2-row3Link {
+  position: absolute;
+  width: 160px;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
 
 .task-1-lv3 {
   position: absolute;
@@ -290,4 +367,25 @@ a {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.task-2-lv3 {
+  position: absolute;
+  top: 54%;
+  left: 46%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #dae3f3;
+  display: block;
+}
+.task-2-lv3-link {
+  position: absolute;
+  width: 110px;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+
 
