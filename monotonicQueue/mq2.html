@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/VM 09 Bài 08 - Giá trị chiếc quạt mo
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/bland" target="self">https://oj.vnoi.info/problem/bland</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;queue&gt;
+        using namespace std;
+        
+        #define INF 1000000000
+        #define MAX 3001
+        
+        int m, n, K;
+        int h[MAX][MAX];
+        int hT[MAX][MAX]; // ma tran chuyen vi
+        int f[MAX][MAX];
+        int a[MAX], b[MAX];
+        
+        /*
+          Ý tưởng: 
+          + duyệt tất cả các trường hợp thỏa mãn nhưng có sự tối ưu
+          + Sử dụng monotonic queue
+        */
+        
+        int findRes(int m, int n, int h[][MAX]) {
+          for (int i = 1; i &lt;= m; i++) {
+        
+            for (int j = 1; j &lt;= n; j++) {
+              a[j] = -INF;
+              b[j] = INF;
+            }
+            for (int j = i; j &lt;= m; j++) { // i -&gt; j
+              int left = 1; int ans = 0;
+              deque&lt;int&gt; qMax, qMin;
+        
+              for (int k = 1; k &lt;= n; k++) {
+                a[k] = max(a[k], h[j][k]);
+                b[k] = min(b[k], h[j][k]);
+        
+                while (qMax.size() &amp;&amp; qMax.back() &lt; a[k]) qMax.pop_back();
+                while (qMin.size() &amp;&amp; qMin.back() &gt; b[k]) qMin.pop_back();
+        
+                qMax.push_back(a[k]); 
+                qMin.push_back(b[k]);
+                while (left &lt;= k &amp;&amp; qMax.front() - qMin.front() &gt; K) {
+                  if (qMax.front() == a[left]) qMax.pop_front();
+                  if (qMin.front() == b[left]) qMin.pop_front();
+                  left++;
+                }
+        
+                ans = max(ans, (j - i + 1) * (k - left + 1));
+              }
+        
+              f[i][j] = ans;
+            }
+          }
+        
+          int res = 0;
+          for (int i = 1; i &lt; m; i++) {
+        
+            int r1 = 0, r2 = 0;
+        
+            for (int j = 1; j &lt;= i; j++) {
+              for (int k = j; k &lt;= i; k++) {
+                r1 = max(r1, f[j][k]);
+              }
+            }
+        
+            for (int j = i + 1; j &lt;= m; j++) {
+              for (int k = j; k &lt;= m; k++) {
+                r2 = max(r2, f[j][k]);
+              }
+            }
+        
+            res = max(res, r1 + r2);
+        
+          }
+        
+          return res;
+        
+        }
+        
+        int main() {
+          cin &gt;&gt; m &gt;&gt; n &gt;&gt; K;
+        
+          for (int i = 1; i &lt;= m; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+              cin &gt;&gt; h[i][j];
+              hT[j][i] = h[i][j];
+            }
+          }
+        
+          int ans = max(findRes(m, n, h), findRes(n, m, hT));
+        
+          cout &lt;&lt; ans &lt;&lt; endl;
+        
+          return 0;
+        }</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
