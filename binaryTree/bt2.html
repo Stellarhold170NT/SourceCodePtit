@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Biểu thức logic
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/dhlexp" target="self">https://oj.vnoi.info/problem/dhlexp</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;string&gt;
+        #include &lt;stack&gt;
+        using namespace std;
+        
+        #define LIM 1000000009
+        
+        class Node {
+        public:
+          Node* left;
+          Node* right;
+          char data;
+        
+          Node(char data) {
+            left = nullptr;
+            right = nullptr;
+            this-&gt;data = data;
+          }
+        };
+        
+        string getNum(string s) {
+          string res = &quot;&quot;;
+          string a = &quot;&quot;;
+          int len = s.length();
+        
+          long long num = 0ll;
+        
+          int i = len - 1;
+        
+          while (s[i] != &apos; &apos;) a += s[i--];
+        
+          for (int i = a.length() - 1; i &gt;= 0; i--) {
+            num = num * 10ll + (a[i] - &apos;0&apos;);
+          }
+        
+          while (num &gt; 0) {
+            res = (char)(num % 2 + &apos;0&apos;) + res;
+            num /= 2;
+          }
+          
+          while (res.length() &lt; 32) res = &apos;0&apos; + res;
+        
+          return res;
+        }
+        
+        // Chuyển tất cả thành kí tự
+        string encode(string s) {
+          string res = &quot;&quot;;
+          int len = s.length();
+        
+          for (int i = 0; i &lt; len; i++) {
+            if (s[i] == &apos; &apos; &amp;&amp; s[i + 1] == &apos;=&apos;) break;
+        
+            if ((s[i] &gt;= &apos;a&apos; &amp;&amp; s[i] &lt;= &apos;z&apos;) || s[i] == &apos; &apos;
+              || s[i] == &apos;(&apos; || s[i] == &apos;)&apos;) res += s[i];
+            else {
+              if (s[i] == &apos;A&apos;) { // AND
+                res += &apos;&amp;&apos;; 
+                i += 2;
+              }
+              else if (s[i] == &apos;O&apos;) { // OR
+                res += &apos;|&apos;; 
+                i++;
+              }
+              else if (s[i] == &apos;X&apos;) { // XOR
+                res += &apos;^&apos;;
+                i += 2;
+              }
+            }
+          }
+        
+          return res;
+        }
+        
+        // Chuyển xâu theo format: phần tử 1 - phần tử 2 - toán tử
+        string transform(string s) { 
+          string res = &quot;&quot;;
+          s = &apos;(&apos; + s + &apos;)&apos;;
+          int len = s.length();
+        
+          stack&lt;char&gt; iDex;
+          
+          for (int i = 0; i &lt; len; i++) {
+            if (s[i] == &apos; &apos;) continue;
+        
+            if (s[i] == &apos;(&apos;) iDex.push(s[i]);
+            else if (s[i] &gt;= &apos;a&apos; &amp;&amp; s[i] &lt;= &apos;z&apos;) res += s[i];
+            else if (s[i] == &apos;)&apos;) {
+              while (true) {
+                char ch = iDex.top();
+                iDex.pop();
+                if (ch == &apos;(&apos;) break;
+                res += ch;
+              }
+            }
+            else {
+              while (!iDex.empty() &amp;&amp; iDex.top() != &apos;(&apos;) {
+                res = res + iDex.top();
+                iDex.pop();
+              }
+              iDex.push(s[i]);
+            }
+          }
+        
+          return res;
+        }
+        
+        Node* builtBinaryTree(string s) {
+          int len = s.length();
+        
+          stack&lt;Node*&gt; iDex;
+          for (int i = 0; i &lt; len; i++) {
+            Node* a = new Node(s[i]);
+            if (s[i] &lt; &apos;a&apos; || s[i] &gt; &apos;z&apos;) {
+              a-&gt;right = iDex.top();
+              iDex.pop();
+              a-&gt;left = iDex.top();
+              iDex.pop();
+            }
+            iDex.push(a);
+          }
+        
+          return iDex.top();
+        }
+        
+        #define f(x,y) dfs(a-&gt;left, x) * dfs(a-&gt;right, y) % LIM
+        
+        long long dfs(Node* a, int n) {
+          if (a-&gt;data &gt;= &apos;a&apos; &amp;&amp; a-&gt;data &lt;= &apos;z&apos;) return 1ll;
+        
+          if (a-&gt;data == &apos;&amp;&apos;) 
+            return n ? f(1, 1) : ((f(1, 0) + f(0, 1)) % LIM + f(0, 0)) % LIM;
+          else if (a-&gt;data == &apos;|&apos;) 
+            return n ? ((f(1, 0) + f(0, 1)) % LIM + f(1, 1)) % LIM : f(0, 0);
+          //else if (a-&gt;data == &apos;^&apos;) 
+          return n ? (f(1, 0) + f(0, 1)) % LIM : (f(0, 0) + f(1, 1)) % LIM;
+        }
+        
+        int main() {
+          int k;
+          cin &gt;&gt; k;
+          cin.ignore();
+        
+          while (k--) {
+            string s;
+            getline(cin, s);
+            
+            string num = getNum(s);
+        
+            s = encode(s);
+            s = transform(s);
+        
+            Node* root = builtBinaryTree(s);
+        
+            int len = num.length();
+        
+            long long ans = 1;
+        
+            for (int i = 0; i &lt; len; i++) {
+              ans = (ans * dfs(root, num[i] - &apos;0&apos;)) % LIM;
+            }
+        
+            cout &lt;&lt; ans % LIM &lt;&lt; endl;
+          }
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
