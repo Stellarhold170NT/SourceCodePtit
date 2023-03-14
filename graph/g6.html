@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/BCGRASS - Bãi cỏ ngon nhất
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCGRASS/" target="self">https://www.spoj.com/PTIT/problems/BCGRASS/</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #define _CRT_SECURE_NO_WARNINGS
+        #include &lt;iostream&gt;
+        #include &lt;cstring&gt;
+        using namespace std;
+        
+        int n, m;
+        char arr[101][101];
+        
+        void dfs(int x, int y) {
+          arr[x][y] = &apos;.&apos;;
+          if (x + 1 &lt; n) {
+            if (arr[x + 1][y] == &apos;#&apos;) dfs(x + 1, y);
+          }
+          if (x - 1 &gt;= 0) {
+            if (arr[x - 1][y] == &apos;#&apos;) dfs(x - 1, y);
+          }
+          if (y + 1 &lt; m) {
+            if (arr[x][y + 1] == &apos;#&apos;) dfs(x, y + 1);
+          }
+          if (y - 1 &gt;= 0) {
+            if (arr[x][y - 1] == &apos;#&apos;) dfs(x, y - 1);
+          }
+        }
+        
+        int main() {
+        
+          cin &gt;&gt; n &gt;&gt; m;
+        
+        
+        
+          for (int i = 0; i &lt; n; i++) {
+            string s;
+            cin &gt;&gt; s;
+            strcpy(arr[i], s.c_str());
+          }
+        
+          int res = 0;
+          for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+              if (arr[i][j] == &apos;#&apos;) {
+                res++;
+                dfs(i, j);
+              }
+            }
+          }
+        
+          cout &lt;&lt; res &lt;&lt; endl;
+        
+          return 0;
+        }</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Vị trí tốt nhất
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/bestspot" target="self">https://oj.vnoi.info/problem/bestspot</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;queue&gt;
+        #include &lt;vector&gt;
+        using namespace std;
+        
+        #define INF 1000000000
+        
+        int P, n, C;
+        vector&lt;pair&lt;int, int&gt;&gt; Next[505];
+        int dist[505][505];
+        
+        struct Node {
+          int currentNode, dist;
+          bool operator &lt; (const Node&amp; otherNode) const {
+            return this-&gt;dist &gt; otherNode.dist;
+          }
+        };
+        
+        void dijkstra(int s) {
+          priority_queue&lt;Node&gt; iDex;
+          for (int i = 1; i &lt;= P; i++) dist[s][i] = INF;;
+          dist[s][s] = 0;
+          iDex.push({ s, 0 });
+        
+          while (!iDex.empty()) {
+            int u = iDex.top().currentNode;
+            int c = iDex.top().dist;
+            iDex.pop();
+        
+            if (c &gt; dist[s][u]) continue;
+        
+            for (int i = 0; i &lt; Next[u].size(); i++) {
+              int nextNode = Next[u].at(i).first;
+              int w = Next[u].at(i).second;
+        
+              if (dist[s][nextNode] &gt; dist[s][u] + w) {
+                dist[s][nextNode] = dist[s][u] + w;
+                iDex.push({ nextNode, dist[s][nextNode] });
+              }
+            }
+        
+          }
+        }
+        
+        int main() {
+          cin &gt;&gt; P &gt;&gt; n &gt;&gt; C;
+        
+          int* F = new int[n + 1];
+        
+          for (int i = 1; i &lt;= n; i++) {
+            cin &gt;&gt; F[i];
+          }
+        
+        
+        
+          for (int i = 1; i &lt;= C; i++) {
+            int u, v, c;
+            cin &gt;&gt; u &gt;&gt; v &gt;&gt; c;
+            Next[u].push_back({ v, c });
+            Next[v].push_back({ u, c });
+          }
+        
+          //---
+          for (int i = 1; i &lt;= P; i++) dijkstra(i);
+        
+          int ans = INF;
+          int cnt = 0;
+          for (int i = 1; i &lt;= P; i++) {
+            int sum = 0;
+            for (int j = 1; j &lt;= n; j++) {
+              if (dist[i][F[j]] == INF) {
+                sum = 0;
+                break;
+              }
+              sum = sum + dist[i][F[j]];
+            }
+            if (sum == 0) continue;
+            if (ans &gt; sum) {
+              ans = sum;
+              cnt = i;
+            }
+          }
+        
+          cout &lt;&lt; cnt &lt;&lt; endl;
+        
+          return 0;
+        }</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/BCROBOT - Đường đi rô-bốt
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCROBOT/" target="self">https://www.spoj.com/PTIT/problems/BCROBOT/</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;queue&gt;
+        using namespace std;
+         
+        #define RE 2147483647
+         
+        int n;
+        char a[1001][1001];
+        int dx[4]{ 1, -1, 0, 0 };
+        int dy[4]{ 0, 0, 1, -1 };
+         
+        class Node {
+        public:
+          int x, y;
+         
+          Node(int x, int y) {
+            this-&gt;x = x;
+            this-&gt;y = y;
+          }
+        };
+         
+        void bfs(int x, int y, bool** visited) {
+          queue&lt;Node&gt; iDex;
+          iDex.push(Node(x, y));
+          visited[x][y] = true;
+         
+          while (!iDex.empty()) {
+            Node t = iDex.front();
+            iDex.pop();
+         
+            for (int i = 0; i &lt;= 3; i++) {
+              int nextX = t.x + dx[i];
+              int nextY = t.y + dy[i];
+              if (nextX &gt;= 1 &amp;&amp; nextX &lt;= n &amp;&amp; nextY &gt;= 1 &amp;&amp; nextY &lt;= n &amp;&amp;
+                !visited[nextX][nextY] &amp;&amp; a[nextX][nextY] == &apos;.&apos;) {
+                visited[nextX][nextY] = true;
+                iDex.push(Node(nextX, nextY));
+              }
+            }
+          }
+        }
+         
+        int main() {
+          cin &gt;&gt; n;
+         
+          for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+              cin &gt;&gt; a[i][j];
+            }
+          }
+         
+          long long** f = new long long* [1003];
+          for (int i = 0; i &lt;= 1002; i++) {
+            f[i] = new long long[1003] { 0 };
+          }
+         
+          bool** visited = new bool* [1003];
+          for (int i = 0; i &lt;= 1002; i++) {
+            visited[i] = new bool[1003] { false };
+          }
+         
+          f[1][0] = 1;
+         
+          for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+              if (a[i][j] == &apos;.&apos;)
+              f[i][j] = (f[i - 1][j] + f[i][j - 1]) % RE;
+            }
+          }
+          //cout &lt;&lt; f[n][n] &lt;&lt; endl;
+          if (f[n][n] &gt; 0) {
+            cout &lt;&lt; f[n][n] &lt;&lt; endl;
+          }
+          else {
+            bfs(1, 1, visited);
+            if (visited[n][n] == true) {
+              cout &lt;&lt; &quot;THE GAME IS A LIE&quot; &lt;&lt; endl;
+            }
+            else {
+              cout &lt;&lt; &quot;INCONCEIVABLE&quot; &lt;&lt; endl;
+            }
+          }
+         
+          return 0;
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

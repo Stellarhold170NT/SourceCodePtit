@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/VM 08 Bài 13 - Bin Laden
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/binladen" target="self">https://oj.vnoi.info/problem/binladen</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;queue&gt;
+        using namespace std;
+        
+        #define INF 1000000000
+        
+        int m, n;
+        int ans = INF;
+        int a[3000][20];
+        int b[3000][20];
+        int d[3000][20];
+        
+        
+        struct Node {
+          int x, y, dist;
+        
+          bool operator &lt; (const Node&amp; other) const {
+            return this-&gt;dist &gt; other.dist;
+          }
+        };
+        
+        priority_queue&lt;Node&gt; iDex;
+        
+        void up(Node x) {
+          int i = x.x, j = x.y, p = x.x - 1, q = x.y;
+          if (p &gt;= 0 &amp;&amp; d[i][j] + b[i][j] &lt; d[p][q]) {
+            d[p][q] = d[i][j] + b[i][j];
+            iDex.push({ p, q, d[p][q] });
+          }
+        }
+        
+        void down(Node x) {
+          int i = x.x, j = x.y, p = x.x + 1, q = x.y;
+          if (p &lt;= m &amp;&amp; d[i][j] + b[p][q] &lt; d[p][q]) {
+            d[p][q] = d[i][j] + b[p][q];
+            iDex.push({ p, q, d[p][q] });
+          }
+        }
+        
+        void left(Node x) {
+          int i = x.x, j = x.y, p = x.x, q = x.y - 1;
+          if (q &gt;= 1 &amp;&amp; d[i][j] + a[p][q] &lt; d[p][q]) {
+            d[p][q] = d[i][j] + a[p][q];
+            iDex.push({ p, q, d[p][q] });
+          }
+        }
+        
+        void right(Node x) {
+          int i = x.x, j = x.y, p = x.x, q = x.y + 1;
+          if (q &lt;= n &amp;&amp; d[i][j] + a[i][j] &lt; d[p][q]) {
+            d[p][q] = d[i][j] + a[i][j];
+            iDex.push({ p, q, d[p][q] });
+          }
+        }
+        
+        void dijkstra() {
+          for (int i = 0; i &lt;= m; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+              d[i][j] = INF;
+            }
+          }
+        
+          d[m][n] = 0;
+        
+          iDex.push({ m, n, d[m][n] });
+          
+          while (!iDex.empty()) {
+            Node currentNode = iDex.top();
+            iDex.pop();
+        
+            //cout &lt;&lt; currentNode.x &lt;&lt; &quot; &quot; &lt;&lt; currentNode.y &lt;&lt; &quot; &quot; &lt;&lt; currentNode.dist &lt;&lt; endl;
+        
+            if (currentNode.x == 0) ans = min(ans, d[currentNode.x][currentNode.y]);
+            if (currentNode.dist &gt; d[currentNode.x][currentNode.y] || currentNode.x == 0)
+              continue;
+            up(currentNode);
+            down(currentNode);
+            left(currentNode);
+            right(currentNode);
+          }
+        }
+        
+        int main() {
+          cin &gt;&gt; m &gt;&gt; n;
+        
+          for (int i = 1; i &lt;= m * 2; i++) {
+            if (i % 2 == 0) { 
+              for (int j = 1; j &lt;= n - 1; j++) cin &gt;&gt; a[(i + 1) / 2][j]; // --&gt; mang luu duong di ngang
+            }
+            else for (int j = 1; j &lt;= n; j++) cin &gt;&gt; b[((i + 1) / 2)][j]; // --&gt; mang luu duong di len xuong
+          }
+        
+          dijkstra();
+        
+          cout &lt;&lt; ans &lt;&lt; endl;
+        
+          return 0;
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/BCACM11D - Đường nguyên tố
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCACM11D/" target="self">https://www.spoj.com/PTIT/problems/BCACM11D/</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;queue&gt;
+        #include &lt;vector&gt;
+        using namespace std;
+         
+        int f[10000] = { 0 };
+        vector &lt;int&gt; nt;
+        vector &lt;int&gt; Next[10000];
+         
+        void SNT() {
+          for (int i = 2; i &lt;= 9999; i++) {
+            for (int j = i * i; j &lt;= 9999; j += i) {
+              f[j] = 1;
+            }
+          }
+          //cout &lt;&lt; 123 &lt;&lt; endl;
+          for (int i = 1000; i &lt;= 9999; i++) {
+            if (f[i] == 0) {
+              //if (i &lt; 1050) cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+              nt.push_back(i);
+            }
+          }
+        }
+         
+        bool check(int x, int y) {
+          int count = 0;
+          while (x &amp;&amp; y) {
+            if (x % 10 != y % 10) count++;
+            x /= 10;
+            y /= 10;
+          }
+          return count == 1;
+        }
+         
+        void init() {
+          int len = nt.size();
+          for (int i = 0; i &lt; len; i++) {
+            for (int j = i + 1; j &lt; len; j++) {
+              if (check(nt[i], nt[j])) {
+                Next[nt[i]].push_back(nt[j]);
+                Next[nt[j]].push_back(nt[i]);
+              }
+            }
+          }
+        }
+         
+        int search(int x, int y) {
+          bool visited[10000] = { false };
+          int count[100000] = { 0 };
+          queue &lt;int&gt; iDex;
+          iDex.push(x);
+          visited[x] = true;
+          while (!iDex.empty()) {
+            int num = iDex.front();
+            iDex.pop();
+            if (num == y) return count[num];
+            for (int i = 0; i &lt; Next[num].size(); i++) {
+              if (visited[Next[num][i]]) continue;
+              visited[Next[num][i]] = true;
+              count[Next[num][i]] = count[num] + 1;
+              iDex.push(Next[num][i]);
+            }
+          }
+        }
+         
+        int main() {
+          SNT();
+          init();
+          int t;
+          cin &gt;&gt; t;
+          
+          while (t--) {
+            int x, y;
+            cin &gt;&gt; x &gt;&gt; y;
+            int res = search(x, y);
+            cout &lt;&lt; res &lt;&lt; endl;
+          }
+         
+          return 0;
+        } </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

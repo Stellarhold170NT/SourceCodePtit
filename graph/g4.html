@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/BCBIN - Các thùng nước
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://www.spoj.com/PTIT/problems/BCBIN/" target="self">https://www.spoj.com/PTIT/problems/BCBIN/</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        using namespace std;
+        
+        #define SIZE 100000
+        int* root = new int[SIZE + 1];
+        
+        // ý tưởng là tạo ra cây khung chung gốc bằng cách tạo ra gốc và cập nhật lại gốc
+        // và các gốc cũ sẽ kết nối với gốc mới -&gt; tạo thành một cây khung với 1 gốc chính và các gốc phụ
+        
+        int findRoot(int n) {
+          if (root[n] != n) root[n] = findRoot(root[n]);
+          return root[n];
+        }
+        
+        int main() {
+          int n;
+          cin &gt;&gt; n;
+        
+          for (int i = 1; i &lt;= SIZE; i++) {
+            root[i] = i;
+          }
+        
+          for (int i = 1; i &lt;= n; i++) {
+            int a, b, t;
+            cin &gt;&gt; a &gt;&gt; b &gt;&gt; t;
+        
+            int rootA = findRoot(a);
+            int rootB = findRoot(b);
+        
+            //cout &lt;&lt; rootA &lt;&lt; &quot; &quot; &lt;&lt; rootB &lt;&lt; endl;
+        
+            if (t == 1) {
+              if (rootA != rootB) root[rootA] = rootB;
+            }
+            else {
+              if (rootA == rootB) {
+                cout &lt;&lt; &quot;1&quot; &lt;&lt; endl;
+              }
+              else cout &lt;&lt; &quot;0&quot; &lt;&lt; endl;
+            }
+          }
+          return 0;
+        }</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

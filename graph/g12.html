@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/VOI 13 Bài 5 - Hành trình du lịch
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="https://oj.vnoi.info/problem/tours13" target="self">https://oj.vnoi.info/problem/tours13</a>
+    <div class="code">
+    <pre>
+      <code class="language-cpp">        #include &lt;iostream&gt;
+        #include &lt;vector&gt;
+        #include &lt;queue&gt;
+        #include &lt;algorithm&gt;
+        using namespace std;
+        
+        struct Edge {
+          int u, v, c;
+        };
+        
+        typedef vector&lt;Edge&gt;::iterator iter;
+        
+        struct pack {
+          long long s;
+          iter it;
+        };
+        
+        bool operator &lt; (const pack &amp;a, const pack &amp;b) {
+          return a.s &gt; b.s;
+        }
+        
+        void showVector(vector&lt;Edge&gt; E);
+        
+        int dijkstra(int x, vector&lt;Edge&gt; &amp;E, vector&lt;iter&gt; &amp;s) {
+          if (s[x] == E.end()) return -1;
+        
+          vector&lt;long long&gt; f(s.size(), 0);
+          priority_queue&lt;pack&gt; iDex;
+        
+          iDex.push({ s[x]-&gt;c, s[x] });
+        
+          while (!iDex.empty()) {
+            pack t = iDex.top();
+        
+            if (t.it-&gt;v == x) return t.s;
+        
+            f[t.it-&gt;v] = t.s;
+        
+            if (s[t.it-&gt;v] != E.end()) {
+              iDex.push({t.s + s[t.it-&gt;v]-&gt;c, s[t.it-&gt;v]});
+            }
+        
+            while (f[iDex.top().it-&gt;v]) {
+              iter it = iDex.top().it;
+              iDex.pop();
+        
+              int u = it-&gt;u;
+        
+              while (it != E.end() &amp;&amp; it-&gt;u == u) {
+                if (!f[it-&gt;v]) {
+                  iDex.push({ f[u] + it-&gt;c, it });
+                  break;
+                }
+                it++;
+              }
+            }
+          }
+          return -1;
+        }
+        
+        int main() {
+          ios::sync_with_stdio(false); cin.tie(0);
+          int T;
+          cin &gt;&gt; T;
+        
+          while (T--) {
+            int n, m;
+            cin &gt;&gt; n &gt;&gt; m;
+        
+            vector&lt;Edge&gt; E(m);
+        
+            for (auto&amp; it : E) {
+              cin &gt;&gt; it.u &gt;&gt; it.v &gt;&gt; it.c;
+              it.u--;
+              it.v--;
+            }
+        
+            sort(E.begin(), E.end(), [](const Edge &amp;a, const Edge &amp;b) {
+              return a.c &lt; b.c;
+              });
+        
+            stable_sort(E.begin(), E.end(), [](const Edge &amp;a, const Edge &amp;b) {
+              return a.u &lt; b.u;
+              });
+        
+            vector&lt;iter&gt; s(n, E.end()); // mark
+        
+            for (auto it = E.begin(); it != E.end(); it++) {
+              if (s[it-&gt;u] == E.end()) s[it-&gt;u] = it;
+            }
+        
+            for (int i = 0; i &lt; n; i++) {
+              cout &lt;&lt; dijkstra(i, E, s) &lt;&lt; endl;
+            }
+        
+          }
+          return 0;
+        }
+        
+        void showVector(vector&lt;Edge&gt; E) {
+          for (auto it : E) {
+            cout &lt;&lt; it.u &lt;&lt; &quot; &quot; &lt;&lt; it.v &lt;&lt; &quot; &quot; &lt;&lt; it.c &lt;&lt; endl;
+          }
+        }
+        </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
