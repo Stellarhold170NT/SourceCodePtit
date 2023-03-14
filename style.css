@@ -272,3 +272,22 @@ a {
   left: 50%;
   transform: translateX(-50%);
 }
+
+
+.task-1-lv3 {
+  position: absolute;
+  top: 54%;
+  left: 34.5%;
+  width: 10%;
+  height: 2.5%;
+  border-radius: 999px;
+  background: #dae3f3;
+  display: block;
+}
+.task-1-lv3-link {
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
