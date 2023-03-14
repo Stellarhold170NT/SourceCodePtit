@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/DIKI - Sân điền kinh
+
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/135" target="self">http://ntucoder.net/Problem/Details/135</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        USES CRT;
+        var     n,m,i,tmp:int32;
+                a:array[0..trunc(1e5)] of int32;
+FUNCTION FIND (l,r,i:int32):int32;
+var mid:int32;
+begin
+    while (l&lt;=r) do begin
+        mid:=(l+r) div 2;
+        if a[mid]-a[i]=m then exit(mid) else
+        if a[mid]-a[i]&gt;m then r:=mid-1 else l:=mid+1;
+    end;
+    exit(-1);
+end;
+                begin
+                    readln(n,m);
+                    for i:=1 to n do read(a[i]);
+                    for i:=1 to n-1 do begin
+                        tmp:=FIND(i+1,n,i);
+                        if tmp&lt;&gt;-1 then begin
+                            writeln(a[i],#32,a[tmp]);
+                            break;
+                        end;
+                    end;
+                    if tmp=-1 then writeln(-1);
+                end.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

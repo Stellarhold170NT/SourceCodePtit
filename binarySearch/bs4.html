@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/MOBI - Đặt trạm phủ sóng (OLP 30/4 Khối 10)
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/4408" target="self">http://ntucoder.net/Problem/Details/4408</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        Uses Crt,math;
+        Var  n,last,i,x,y,k:longint; t:array[-10..1000000] of int64; kq:int64;
+        Begin
+            readln(n,k);
+            last:=-maxlongint;
+            for i:=1 to n do
+             begin
+                 read(x,y);
+                 t[x]:=y;
+                 last:=max(last,x);
+             end;
+            //t[0]:=0;
+        
+            for i:=1 to last do t[i]:=t[i-1]+t[i];
+        
+            //kq:=-maxlongint;
+            if last&lt;=k*2+1 then begin writeln(t[last]); exit; end;
+            for i:=k to last-k do    //thuat toan chi hoat dong tren khoang (-oo;last) khong hoat dong khi last&lt;=k*2+1
+             begin
+                 kq:=max(t[i+k]-t[i-(k+1)],kq);
+                 //writeln(i,&apos; &apos;,kq,&apos; &apos;,&apos;--&apos;);
+             end;
+        
+            writeln(kq);
+            readln;
+        End. </code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>

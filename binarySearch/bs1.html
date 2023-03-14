@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source code.ptit</title>
+    <link rel="icon" type="image/x-icon" href="https://stellarhold170nt.github.io/SourceCodePtit/NeptuneLogo.png">
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/reset.css" />
+    <link rel="stylesheet" href="https://stellarhold170nt.github.io/SourceCodePtit/assets/css/simple1.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
+  </head>
+<body>
+    <a href="list.html"><div class="header">
+    </div></a>
+    <h1>/Khieuvu3 - Khiêu vũ 3
+
+
+    </h1>
+    <p>&lt;Problem&gt;</p>
+    <a href="http://ntucoder.net/Problem/Details/5571" target="self">http://ntucoder.net/Problem/Details/5571</a>
+    <div class="code">
+    <pre>
+      <code class="language-pascal">        USES CRT;
+        type    Arr=array[-100..trunc(1e6)] of longint;
+        var     a:Arr;
+                n,k,i,dem:longint;
+PROCEDURE SORT (var a:Arr; l,r:longint);
+var i,j,x,tg:longint;
+begin
+    i:=l;
+    j:=r;
+    x:=a[(l+r) div 2];
+    repeat
+        while a[i]&lt;x do inc(i);
+        while a[j]&gt;x do dec(j);
+        if not (i&gt;j) then begin
+            tg:=a[i];
+            a[i]:=a[j];
+            a[j]:=tg;
+            inc(i);
+            dec(j);
+        end;
+    until (i&gt;j);
+    if l&lt;j then SORT(a,l,j);
+    if i&lt;r then SORT(a,i,r);
+end;
+FUNCTION FIND (x:longint):boolean;
+var l,r,mid:longint;
+begin
+    l:=1; r:=n;
+    while (l&lt;=r) do begin
+        mid:=(l+r) div 2;
+        if a[mid]=x then exit(true) else
+        if a[mid]&gt;x then r:=mid-1 else l:=mid+1;
+    end;
+    exit(false);
+end;
+                begin
+                    readln(n,k);
+                    for i:=1 to n do read(a[i]);
+                    SORT(a,1,n);
+                    dem:=0;
+                    for i:=1 to n do
+                        if (FIND(a[i]-k)) then inc(dem);
+                    writeln(dem);
+                end.</code>
+      </pre>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
